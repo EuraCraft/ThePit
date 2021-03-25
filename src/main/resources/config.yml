@@ -1,0 +1,69 @@
+activities_interval: 280
+
+spawn:
+  world: world
+  x: 77
+  y: 111
+  z: 256.300
+  yaw: -0.5
+  pitch: 1
+
+map_area:
+  world: world
+  first_position:
+    x: 29
+    y: 103
+    z: 279
+  second_position:
+    x: 59
+    y: 103
+    z: 249
+
+center_area:
+  world: world
+  first_position:
+    x: 37
+    y: 103
+    z: 258
+  second_position:
+    x: 50
+    y: 103
+    z: 270
+
+areas:
+  green:
+    first_position:
+      x: 59
+      y: 103
+      z: 279
+    second_position:
+      x: 44
+      y: 103
+      z: 264
+  brown:
+    first_position:
+      x: 29
+      y: 103
+      z: 279
+    second_position:
+      x: 44
+      y: 103
+      z: 264
+  pink:
+    first_position:
+      x: 29
+      y: 103
+      z: 249
+    second_position:
+      x: 44
+      y: 103
+      z: 264
+  gray:
+    first_position:
+      x: 59
+      y: 103
+      z: 249
+    second_position:
+      x: 44
+      y: 103
+      z: 264
