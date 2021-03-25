@@ -61,9 +61,13 @@ public class ThePit extends JavaPlugin {
         registerListeners();
 
         getServer().getOnlinePlayers().forEach(player -> {
+            // load bank data
             BankManager.getInstance().loadBank(player);
+            // load stats
             PlayerStatisticsManager.getInstance().getPlayerStatistics().add(new PlayerStatistic(player));
+            // load prime
             PrimeManager.getInstance().loadPrime(player);
+            // scoreboard
             IEuraPlayer euraPlayer = EuraAPI.getInstance().getEuraPlayer(player.getUniqueId());
             euraPlayer.createScoreBoard("thepit");
             ScoreboardManager.getInstance().register(euraPlayer);

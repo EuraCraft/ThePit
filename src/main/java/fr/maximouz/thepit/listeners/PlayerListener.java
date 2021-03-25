@@ -41,7 +41,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class PlayerListener implements Listener {
 
     // On Player Joins
-    @EventHandler (priority = EventPriority.LOWEST)
+    @EventHandler (priority = EventPriority.LOW)
     public void onJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
