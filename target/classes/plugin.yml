@@ -1,0 +1,8 @@
+name: ThePit
+version: 1.0
+author: Maximouz
+main: fr.maximouz.thepit.ThePit
+depend:
+  - EuraCore
+commands:
+  tag:
