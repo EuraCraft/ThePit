@@ -1,11 +1,11 @@
 package fr.maximouz.thepit.displayname;
 
-import fr.maximouz.thepit.Tag.TagManager;
+import fr.maximouz.thepit.tag.TagManager;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.BankManager;
 import fr.maximouz.thepit.bank.Prestige;
 import fr.maximouz.thepit.prime.Prime;
-import fr.maximouz.thepit.Tag.Tag;
+import fr.maximouz.thepit.tag.Tag;
 import fr.maximouz.thepit.prime.PrimeManager;
 import org.bukkit.entity.Player;
 
@@ -34,7 +34,17 @@ public class DisplayNameManager {
         // Tab
         player.setPlayerListName(prefix + player.getName() + primeText);
         // Above Head
-        TagManager.getInstance().getTags().add(new Tag(player, prefix, bank.getPrestige().getPriority() + bank.getLevel().getPriority(), primeText));
+        Tag playerTag = TagManager.getInstance().getTag(player);
+        String priority = bank.getPrestige().getPriority() + bank.getLevel().getPriority();
+        if (playerTag == null) {
+            playerTag = new Tag(player, prefix, priority, primeText);
+            TagManager.getInstance().getTags().add(playerTag);
+        } else {
+            playerTag.setPrefix(prefix);
+            playerTag.setPriority(priority);
+            playerTag.setSuffix(primeText);
+        }
+        playerTag.settingTab();
 
     }
 

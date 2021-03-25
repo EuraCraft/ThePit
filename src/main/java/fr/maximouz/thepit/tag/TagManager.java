@@ -1,4 +1,4 @@
-package fr.maximouz.thepit.Tag;
+package fr.maximouz.thepit.tag;
 
 import org.bukkit.entity.Player;
 

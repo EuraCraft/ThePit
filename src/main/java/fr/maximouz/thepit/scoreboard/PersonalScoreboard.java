@@ -1,8 +1,8 @@
 package fr.maximouz.thepit.scoreboard;
 
+import fr.euracraft.api.EuraAPI;
 import fr.euracraft.api.exception.EuraScoreboardException;
 import fr.euracraft.api.net.IEuraScoreboard;
-import fr.euracraft.api.player.IEuraPlayer;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.BankManager;
 import fr.maximouz.thepit.bank.Prestige;
@@ -11,6 +11,7 @@ import fr.maximouz.thepit.statistic.PlayerStatisticsManager;
 import fr.maximouz.thepit.statistic.PlayerStatus;
 import fr.maximouz.thepit.utils.Format;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,18 +33,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class PersonalScoreboard {
 
-    private final IEuraPlayer euraPlayer;
     private final Bank bank;
     private final PlayerStatistic playerStatistic;
 
     private IEuraScoreboard euraScoreboard;
 
-    public PersonalScoreboard(IEuraPlayer euraPlayer) {
-        this.euraPlayer = euraPlayer;
-        this.bank = BankManager.getInstance().getBank(euraPlayer.getPlayer());
-        this.playerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(euraPlayer.getPlayer());
+    public PersonalScoreboard(Player player) {
+        this.bank = BankManager.getInstance().getBank(player);
+        this.playerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(player);
         try {
-            this.euraScoreboard = euraPlayer.getScoreboard();
+            this.euraScoreboard = EuraAPI.getInstance().getEuraPlayer(player.getUniqueId()).getScoreboard();
         } catch (EuraScoreboardException ignored) {
 
         }
@@ -79,4 +78,7 @@ public class PersonalScoreboard {
         euraScoreboard.setLine(nb, "§6play.euracraft.fr");
     }
 
+    public IEuraScoreboard getEuraScoreboard() {
+        return euraScoreboard;
+    }
 }

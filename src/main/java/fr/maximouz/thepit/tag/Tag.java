@@ -1,4 +1,4 @@
-package fr.maximouz.thepit.Tag;
+package fr.maximouz.thepit.tag;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -11,7 +11,7 @@ public class Tag {
 
     private final Player player;
     private String prefix;
-    private final String priority;
+    private String priority;
     private String suffix;
 
     public Tag(Player player, String prefix, String priority, String suffix) {
@@ -19,7 +19,6 @@ public class Tag {
         this.prefix = prefix;
         this.priority = priority;
         this.suffix = suffix;
-        settingTab();
     }
 
     public Player getPlayer() {
@@ -42,11 +41,15 @@ public class Tag {
         return priority;
     }
 
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     public String getPrefix() {
         return prefix;
     }
 
-    private void settingTab() {
+    public void settingTab() {
 
         clearTab();
 

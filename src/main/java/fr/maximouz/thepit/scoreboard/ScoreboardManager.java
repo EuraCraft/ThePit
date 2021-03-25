@@ -1,6 +1,5 @@
 package fr.maximouz.thepit.scoreboard;
 
-import fr.euracraft.api.exception.EuraScoreboardException;
 import fr.euracraft.api.player.IEuraPlayer;
 import fr.maximouz.thepit.ThePit;
 import org.bukkit.Bukkit;
@@ -31,16 +30,13 @@ public class ScoreboardManager {
     }
 
     public void register(IEuraPlayer euraPlayer) {
-        scoreboards.put(euraPlayer.getPlayer().getUniqueId(), new PersonalScoreboard(euraPlayer));
+        scoreboards.put(euraPlayer.getPlayer().getUniqueId(), new PersonalScoreboard(euraPlayer.getPlayer()));
     }
 
-    public void remove(IEuraPlayer euraPlayer) {
-        scoreboards.remove(euraPlayer.getPlayer().getUniqueId());
-        try {
-            euraPlayer.getScoreboard().destroy();
-        } catch (EuraScoreboardException e) {
-            Bukkit.getLogger().severe("Disabling a null scoreboard for " + euraPlayer.getPlayer().getName());
-        }
+    public void remove(Player player) {
+        PersonalScoreboard scoreboard = scoreboards.get(player.getUniqueId());
+        scoreboards.remove(player.getUniqueId());
+        scoreboard.getEuraScoreboard().destroy();
     }
 
     public static void updateScoreBoard(IEuraPlayer euraPlayer) {

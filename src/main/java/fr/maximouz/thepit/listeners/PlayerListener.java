@@ -67,11 +67,10 @@ public class PlayerListener implements Listener {
     }
 
     // On Player Quit
-    @EventHandler (priority = EventPriority.LOWEST)
+    @EventHandler (priority = EventPriority.LOW)
     public void onQuit(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
-        IEuraPlayer euraPlayer = EuraAPI.getInstance().getEuraPlayer(player.getUniqueId());
 
         Bukkit.getOnlinePlayers().forEach(target -> DisplayNameManager.getInstance().update(target));
 
@@ -79,7 +78,7 @@ public class PlayerListener implements Listener {
         BankManager.getInstance().saveBank(player);
         // save stats
         PlayerStatisticsManager.getInstance().savePlayerStatistic(player);
-        ScoreboardManager.getInstance().remove(euraPlayer);
+        ScoreboardManager.getInstance().remove(player);
 
         event.setQuitMessage(null);
 
