@@ -3,6 +3,7 @@ package fr.maximouz.thepit.upgrade;
 import fr.euracraft.api.item.ItemBuilder;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.Level;
+import fr.maximouz.thepit.utils.Format;
 import fr.maximouz.thepit.utils.IntegerToRoman;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -116,15 +117,21 @@ public abstract class Upgrade implements IUpgrade, Listener {
             meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        } else if (bank.getLevel().level < getLevelRequired(playerTier + 1).level) {
-
-            lore.add(ChatColor.GRAY + "Niveau requis: " + bank.getPrestige().getColor() + "[" + Level.getLevel(bank.getLevel().level + 1).getLevel() + bank.getPrestige().getColor() + "]");
-            lore.add(ChatColor.RED + "Votre niveau est trop bas !");
-
         } else {
 
-            lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + String.format("$%,.2f", tierPrice) + "g");
-            lore.add(bank.getBalance() >= tierPrice ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
+            Level levelRequired = getLevelRequired(playerTier + 1);
+
+            if (levelRequired.level > bank.getLevel().level) {
+
+                lore.add(ChatColor.GRAY + "Niveau requis: " + bank.getPrestige().getColor() + "[" + levelRequired.getLevel() + bank.getPrestige().getColor() + "]");
+                lore.add(ChatColor.RED + "Votre niveau est trop bas !");
+
+            } else {
+
+                lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + Format.format(tierPrice) + "g");
+                lore.add(bank.getBalance() >= tierPrice ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
+
+            }
 
         }
         meta.setLore(lore);

@@ -4,7 +4,12 @@ import fr.maximouz.thepit.bank.Level;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,20 +18,20 @@ public class AssassinUpgrade extends Upgrade {
 
     /**
      * Integer 1 : tier
-     * Integer 2 : Melee damage increasing amount
+     * Integer 2 : Melee damage multiplier
      */
-    private final Map<Integer, Integer> tiersMeleeDamage;
+    private final Map<Integer, Integer> tiersMultiplier;
 
     public AssassinUpgrade() {
         super(UpgradeType.ASSASSIN, "assassin", ChatColor.LIGHT_PURPLE + "Assassin", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "1%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "au corps à corps.");
-        tiersMeleeDamage = new HashMap<>();
+        tiersMultiplier = new HashMap<>();
 
-        tiersMeleeDamage.put(1, 1);
-        setPrice(1, 10.0);
+        tiersMultiplier.put(1, 1);
+        setPrice(1, 250.0);
         setLevelRequired(1, Level.ONE);
 
-        tiersMeleeDamage.put(2, 1);
-        setPrice(2, 20.0); // 1500
+        tiersMultiplier.put(2, 2);
+        setPrice(2, 1500.0); // 1500
         setLevelRequired(2, Level.TWO);
 
     }
@@ -54,6 +59,28 @@ public class AssassinUpgrade extends Upgrade {
 
     @Override
     public int getMaxTier() {
-        return tiersMeleeDamage.size();
+        return tiersMultiplier.size();
     }
+
+    public double getMultiplier(int tier) {
+        return 1 + (tiersMultiplier.get(tier) / 100.0);
+    }
+
+    @EventHandler (priority = EventPriority.LOWEST)
+    public void onDamage(EntityDamageByEntityEvent event) {
+
+        if (event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER || event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
+            return;
+
+        Player player = (Player) event.getDamager();
+
+        int playerTier = getTier(player);
+        if (playerTier > 0) {
+
+            event.setDamage(getMultiplier(playerTier) * event.getDamage());
+
+        }
+
+    }
+
 }

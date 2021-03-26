@@ -3,13 +3,20 @@ package fr.maximouz.thepit.upgrade.upgrades;
 import fr.euracraft.api.item.ItemBuilder;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.Level;
+import fr.maximouz.thepit.events.EarnGoldEvent;
+import fr.maximouz.thepit.events.EarnReason;
+import fr.maximouz.thepit.events.EarnXpEvent;
+import fr.maximouz.thepit.statistic.PlayerStatistic;
+import fr.maximouz.thepit.statistic.PlayerStatisticsManager;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
+import fr.maximouz.thepit.utils.Format;
 import fr.maximouz.thepit.utils.IntegerToRoman;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -95,7 +102,7 @@ public class GatoUpgrade extends Upgrade {
 
         } else {
 
-            lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + String.format("$%,.2f", tierPrice) + "g");
+            lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + Format.format(tierPrice) + "g");
             lore.add(bank.getBalance() >= tierPrice ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
 
         }
@@ -108,5 +115,57 @@ public class GatoUpgrade extends Upgrade {
     @Override
     public short getDyeColor() {
         return 0;
+    }
+
+    public int getTierFirstKills(int tier) {
+        return tiersXKills.get(tier);
+    }
+
+    @EventHandler
+    public void onEarnXp(EarnXpEvent event) {
+
+        if (event.getReason() != EarnReason.KILL)
+            return;
+
+        Player player = event.getPlayer();
+        int playerTier = getTier(player);
+
+        if (playerTier > 0) {
+
+            PlayerStatistic playerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(player);
+            long killStreak = playerStatistic.getKillStreak();
+
+            if (killStreak <= getTierFirstKills(playerTier)) {
+
+                event.setAmount(event.getAmount() + 5.0);
+
+            }
+
+        }
+
+    }
+
+    @EventHandler
+    public void onEarnGold(EarnGoldEvent event) {
+
+        if (event.getReason() != EarnReason.KILL)
+            return;
+
+        Player player = event.getPlayer();
+        int playerTier = getTier(player);
+
+        if (playerTier > 0) {
+
+            PlayerStatistic playerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(player);
+            long killStreak = playerStatistic.getKillStreak();
+
+            if (killStreak <= getTierFirstKills(playerTier)) {
+
+                event.setAmount(event.getAmount() + 5.0);
+
+            }
+
+        }
+
     }
 }

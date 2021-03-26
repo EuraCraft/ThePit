@@ -6,9 +6,7 @@ import fr.maximouz.thepit.ThePit;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.BankManager;
 import fr.maximouz.thepit.displayname.DisplayNameManager;
-import fr.maximouz.thepit.events.PlayerReceiveGAppleEvent;
-import fr.maximouz.thepit.events.PrimeEndEvent;
-import fr.maximouz.thepit.events.PrimeStartEvent;
+import fr.maximouz.thepit.events.*;
 import fr.maximouz.thepit.prime.Prime;
 import fr.maximouz.thepit.prime.PrimeManager;
 import fr.maximouz.thepit.inventories.ShopInventory;
@@ -16,7 +14,9 @@ import fr.maximouz.thepit.scoreboard.ScoreboardManager;
 import fr.maximouz.thepit.statistic.PlayerStatistic;
 import fr.maximouz.thepit.inventories.UpgradesInventory;
 import fr.maximouz.thepit.statistic.PlayerStatisticsManager;
+import fr.maximouz.thepit.tasks.ObsidianBreakTask;
 import fr.maximouz.thepit.tasks.PrimeParticleTask;
+import fr.maximouz.thepit.utils.Format;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -32,8 +32,6 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -85,7 +83,7 @@ public class PlayerListener implements Listener {
     }
 
     // On Player Dies
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOW)
     public void onDie(PlayerDeathEvent event) {
 
         Player player = event.getEntity();
@@ -124,14 +122,33 @@ public class PlayerListener implements Listener {
             }
 
             // Récompenses pour le meurtre
-            double exp = BigDecimal.valueOf(ThreadLocalRandom.current().nextDouble(1.8, 2.9)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-            double balance = BigDecimal.valueOf(ThreadLocalRandom.current().nextDouble(5.0, 15.0)).setScale(1, RoundingMode.HALF_UP).doubleValue();
+            double exp = ThreadLocalRandom.current().nextDouble(2, 5);
+            double gold = ThreadLocalRandom.current().nextDouble(4, 11);
 
-            killerBank.setExperience(killerBank.getExperience() + exp);
-            killerBank.setBalance(killerBank.getBalance() + balance);
+            // Message
+            StringBuilder message = new StringBuilder(ChatColor.GREEN + "" + ChatColor.BOLD + "MEURTRE!" + ChatColor.RESET + "" + ChatColor.GRAY + " sur " + ChatColor.RESET + player.getDisplayName());
 
+            EarnXpEvent earnXpEvent = new EarnXpEvent(EarnReason.KILL, killer, killerBank, exp);
+            Bukkit.getPluginManager().callEvent(earnXpEvent);
+
+            if (!earnXpEvent.isCancelled()) {
+                exp = Format.round(earnXpEvent.getAmount());
+                killerBank.setExperience(killerBank.getExperience() + exp);
+                message.append(" §b+").append(exp).append("XP");
+            }
+
+            EarnGoldEvent earnGoldEvent = new EarnGoldEvent(EarnReason.KILL, killer, killerBank, gold);
+            Bukkit.getPluginManager().callEvent(earnGoldEvent);
+
+            if (!earnGoldEvent.isCancelled()) {
+                gold = Format.round(earnGoldEvent.getAmount());
+                killerBank.setBalance(killerBank.getBalance() + gold);
+                message.append(" §6+").append(gold).append("g");
+            }
+
+            killer.sendMessage(message.toString());
             player.sendMessage("§c§lMORT! §r§7par§r " + killer.getDisplayName());
-            killer.sendMessage("§a§lMEURTRE! §r§7sur§r " + player.getDisplayName() + " §b+" + exp + "XP §6+" + balance + "g");
+
 
             // Ajouter un kill au killer, mettre à jour sa série de meurtres et arrêter son status de combat
             PlayerStatistic killerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(killer);
@@ -140,7 +157,7 @@ public class PlayerListener implements Listener {
             killerStatistic.cancelLastDamage();
 
             // Prévenir d'une éventuelle série de meurtres et ajouter une prime
-            if (killerStatistic.getKillStreak() == 5 || killerStatistic.getKillStreak() == 15 || killerStatistic.getKillStreak() % 10 == 0) {
+            if (killerStatistic.getKillStreak() == 10 || killerStatistic.getKillStreak() == 15 || killerStatistic.getKillStreak() % 10 == 0) {
 
                 Bukkit.broadcastMessage("§d§lSERIE! §7de §d" + killerStatistic.getKillStreak() + " meurtres §7par §r" + killer.getDisplayName());
                 Prime killerPrime = PrimeManager.getInstance().getPrime(killer);
@@ -216,9 +233,9 @@ public class PlayerListener implements Listener {
             Item item = event.getItemDrop();
             ItemStack itemStack = item.getItemStack();
 
-            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.IRON_HELMET && itemStack.getType() != Material.IRON_CHESTPLATE && itemStack.getType() != Material.IRON_LEGGINGS && itemStack.getType() != Material.IRON_BOOTS && itemStack.getType() != Material.DIAMOND_SWORD) {
+            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.DIAMOND_SWORD && !(itemStack.getType().toString().contains("HELMET") || itemStack.getType().toString().contains("CHESTPLATE") || itemStack.getType().toString().contains("LEGGINGS") || itemStack.getType().toString().contains("BOOTS")) && !(itemStack.getType().toString().contains("IRON") || itemStack.getType().toString().contains("DIAMOND"))) {
 
-                item.remove();
+                 event.setCancelled(true);
 
             }
 
@@ -261,11 +278,25 @@ public class PlayerListener implements Listener {
             } else if (item.getType() == Material.GOLD_INGOT) {
 
                 Bank bank = BankManager.getInstance().getBank(player);
-                int amount = ThreadLocalRandom.current().nextInt(3, 9);
-                bank.pay(amount);
-                player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
-                player.sendMessage("§6§lGOLD! §r§7Ramassage au sol de §6" + amount + "g");
-                event.getItem().remove();
+                double amount = ThreadLocalRandom.current().nextInt(3, 9);
+
+                EarnGoldEvent earnGoldEvent = new EarnGoldEvent(EarnReason.PICK_UP, player, bank, amount);
+                Bukkit.getPluginManager().callEvent(earnGoldEvent);
+
+                if (!earnGoldEvent.isCancelled()) {
+
+                    amount = Format.round(earnGoldEvent.getAmount());
+
+                    bank.pay(amount);
+                    player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+                    player.sendMessage("§6§lGOLD! §r§7Ramassage au sol de §6" + amount + "g");
+                    event.getItem().remove();
+
+                } else {
+
+                    event.setCancelled(true);
+
+                }
 
             } else {
 
@@ -290,17 +321,7 @@ public class PlayerListener implements Listener {
 
                 }
 
-                for (int i = 8; i >= 0; i--) {
-
-                    if (contents[i] == null) {
-
-                        event.getItem().remove();
-                        player.getInventory().setItem(i, item);
-                        return;
-
-                    }
-
-                }
+                player.getInventory().addItem(item);
 
             }
 
@@ -346,6 +367,12 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         if (!player.isOp() || player.getGameMode() != GameMode.CREATIVE) {
             event.setCancelled(true);
+        }
+
+        if (event.getBlock().getType() == Material.OBSIDIAN) {
+            ObsidianBreakTask task = ObsidianBreakTask.getTask(event.getBlock().getLocation());
+            if (task != null)
+                task.cancel();
         }
 
     }

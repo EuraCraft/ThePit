@@ -63,7 +63,7 @@ public class PerkChooseInventory extends AbstractInterface {
         if (playerPerk != null && playerPerk.getType() != PerkType.NONE) {
             Perk nonePerk = PerkManager.getInstance().getPerk(PerkType.NONE);
 
-            this.setItem(32, nonePerk.getItemStack(owner, bank), event -> {
+            this.setItem(32, nonePerk.getItemStack(owner), event -> {
                 removePerk(owner, perkSlot);
                 owner.playSound(owner.getLocation(), Sound.NOTE_PIANO, 1f, 1f);
                 new UpgradesInventory(owner, bank, main).open();
@@ -119,7 +119,7 @@ public class PerkChooseInventory extends AbstractInterface {
 
     private ItemStack initPerkItem(Perk perk, Player player, Bank bank, boolean selected) {
 
-        ItemStack item = perk.getItemStack(player, bank);
+        ItemStack item = perk.getItemStack(player);
         ItemMeta meta = item.getItemMeta();
 
         if (perk.getLevelRequired().level <= bank.getLevel().level) {
@@ -134,7 +134,7 @@ public class PerkChooseInventory extends AbstractInterface {
 
                     meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                    lore.add(ChatColor.GREEN + "Vous avez déjà sélectionné cette compétence !");
+                    lore.add(ChatColor.GREEN + "Compétence déjà sélectionnée !");
 
                 } else {
 

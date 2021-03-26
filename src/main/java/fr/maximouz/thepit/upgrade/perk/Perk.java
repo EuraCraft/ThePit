@@ -1,6 +1,5 @@
 package fr.maximouz.thepit.upgrade.perk;
 
-import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -111,7 +110,7 @@ public abstract class Perk implements IPerk, Listener {
         Bukkit.getOnlinePlayers().forEach(this::save);
     }
 
-    public ItemStack getItemStack(Player player, Bank bank) {
+    public ItemStack getItemStack(Player player) {
         ItemStack item = new ItemStack(getMaterial());
         ItemMeta meta = item.getItemMeta();
 
