@@ -83,7 +83,7 @@ public class PlayerListener implements Listener {
     }
 
     // On Player Dies
-    @EventHandler (priority = EventPriority.LOW)
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onDie(PlayerDeathEvent event) {
 
         Player player = event.getEntity();
@@ -172,7 +172,7 @@ public class PlayerListener implements Listener {
 
                         PrimeManager.getInstance().createPrime(killerPrime);
                         Bukkit.broadcastMessage("§6§lPRIME! §7de §650.0g §7sur§r " + killer.getDisplayName() + " §7pour sa série de meurtres élevée");
-                        new PrimeParticleTask(player, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 1L);
+                        new PrimeParticleTask(killer, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 1L);
 
                     }
                 } else {

@@ -21,7 +21,7 @@ public class GoldBoostUpgrade extends Upgrade {
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 10);
-        setPrice(1, 10.0);
+        setPrice(1, 1000.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 20);

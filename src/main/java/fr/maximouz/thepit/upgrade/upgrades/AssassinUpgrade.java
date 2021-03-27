@@ -27,12 +27,16 @@ public class AssassinUpgrade extends Upgrade {
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
-        setPrice(1, 250.0);
+        setPrice(1, 1050.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 2);
-        setPrice(2, 1500.0); // 1500
+        setPrice(2, 1500.0);
         setLevelRequired(2, Level.TWO);
+
+        tiersMultiplier.put(3, 2);
+        setPrice(3, 2250.0);
+        setLevelRequired(3, Level.TWO);
 
     }
     

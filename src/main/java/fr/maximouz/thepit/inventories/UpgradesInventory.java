@@ -10,6 +10,7 @@ import fr.maximouz.thepit.upgrade.perk.PerkManager;
 import fr.maximouz.thepit.upgrade.perk.PerkSlot;
 import fr.maximouz.thepit.upgrade.perk.PerkType;
 import fr.euracraft.api.gui.AbstractInterface;
+import fr.maximouz.thepit.utils.SkinUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -66,7 +67,7 @@ public class UpgradesInventory extends AbstractInterface {
 
                         item = new ItemStack(perk.getMaterial(), 1, (byte) 3);
                         meta = item.getItemMeta();
-                        ((SkullMeta) meta).setOwner("jmql");
+                        SkinUtils.applyGoldenHead((SkullMeta) meta);
 
                     }
 

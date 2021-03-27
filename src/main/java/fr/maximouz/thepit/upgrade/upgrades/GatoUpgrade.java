@@ -32,11 +32,11 @@ public class GatoUpgrade extends Upgrade {
         this.tiersXKills = new HashMap<>();
 
         this.tiersXKills.put(1, 1);
-        setPrice(1, 2000.0);
+        setPrice(1, 1000.0);
         setLevelRequired(1, Level.ONE);
 
         this.tiersXKills.put(2, 2);
-        setPrice(2, 2000.0);
+        setPrice(2, 3000.0);
         setLevelRequired(2, Level.TWO);
     }
 

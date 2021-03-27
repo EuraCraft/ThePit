@@ -27,7 +27,7 @@ public class SniperUpgrade extends Upgrade {
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 3);
-        setPrice(1, 10.0);
+        setPrice(1, 450.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 6);
