@@ -26,7 +26,7 @@ public class TankUpgrade extends Upgrade {
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
-        setPrice(1, 10.0);
+        setPrice(1, 450.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 2);
@@ -68,7 +68,7 @@ public class TankUpgrade extends Upgrade {
     }
 
     public double getMultiplier(int tier) {
-        return tiersMultiplier.get(tier) / 100.0;
+        return 1 - (tiersMultiplier.get(tier) / 100.0);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -29,7 +29,7 @@ public class BuilderUpgrade extends Upgrade {
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 120);
-        setPrice(2, 2750); // 1500
+        setPrice(2, 2750);
         setLevelRequired(2, Level.TWO);
     }
 

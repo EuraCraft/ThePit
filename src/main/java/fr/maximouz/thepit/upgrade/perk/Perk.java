@@ -96,10 +96,12 @@ public abstract class Perk implements IPerk, Listener {
 
     public void select(Player player, PerkSlot slot) {
         getPlayersSelected().put(player, slot);
+        onSelect(player);
     }
 
     public void removeSelect(Player player) {
         getPlayersSelected().remove(player);
+        onUnselect(player);
     }
 
     public void loadAll() {
@@ -135,5 +137,11 @@ public abstract class Perk implements IPerk, Listener {
         save(event.getPlayer());
 
     }
+
+    @Override
+    public void onSelect(Player player) {}
+
+    @Override
+    public void onUnselect(Player player) {}
 
 }

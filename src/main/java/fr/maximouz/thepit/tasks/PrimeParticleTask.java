@@ -34,7 +34,7 @@ public class PrimeParticleTask extends BukkitRunnable {
                     return;
                 }
 
-                spawn(target, WorldUtils.getRandomLocationAroundPlayer(player));
+                spawn(target, player.getLocation().add(WorldUtils.getBackDirection(player.getLocation())));
 
             }
 
@@ -86,7 +86,7 @@ public class PrimeParticleTask extends BukkitRunnable {
                     e.printStackTrace();
                 }
 
-            }, 4L);
+            }, 10L);
 
         } catch (NoSuchMethodException | NoSuchFieldException e) {
             e.printStackTrace();
