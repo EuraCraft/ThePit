@@ -46,6 +46,8 @@ public class ThePit extends JavaPlugin {
 
         saveDefaultConfig();
 
+        EuraAPI.getInstance().loadTranslation(this);
+
         spawnPoint = WorldUtils.loadLocation(getConfig(), "spawn");
 
         World mapAreaWorld = getServer().getWorld(getConfig().getString("map_area.world"));
