@@ -126,13 +126,13 @@ public class ThePit extends JavaPlugin {
         ItemStack sword = new ItemBuilder(Material.IRON_SWORD).setUnbreakable(true).build();
         ItemStack[] others = new ItemStack[] {
                 new ItemBuilder(Material.BOW).setUnbreakable(true).build(),
+                null, null, null, null, null, null,
                 new ItemBuilder(Material.ARROW, 32).build()
         };
 
-        PlayerInitEvent event = new PlayerInitEvent(spawnPoint, sword, null, chestPlate, leggings, boots, others);
+        PlayerInitEvent event = new PlayerInitEvent(player, sword, null, chestPlate, leggings, boots, others);
         getServer().getPluginManager().callEvent(event);
 
-        player.teleport(event.getSpawnPoint());
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1));
 
         player.getInventory().setHelmet(event.getHelmet());

@@ -28,7 +28,7 @@ public class GatoUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersXKills;
 
     public GatoUpgrade() {
-        super(UpgradeType.GATO, "gato", ChatColor.GREEN + "Gourmet", "%KILLS% " + ChatColor.GRAY + "après votre mort", ChatColor.GRAY + "rapportent " + ChatColor.GOLD + "+5g" + ChatColor.GRAY + " et " + ChatColor.AQUA + "+5 XP" + ChatColor.GRAY + "." );
+        super(UpgradeType.GATO, "gato", "Gourmet", "%KILLS% " + ChatColor.GRAY + "après votre mort", ChatColor.GRAY + "rapportent " + ChatColor.GOLD + "+5g" + ChatColor.GRAY + " et " + ChatColor.AQUA + "+5 XP" + ChatColor.GRAY + "." );
         this.tiersXKills = new HashMap<>();
 
         this.tiersXKills.put(1, 1);
@@ -36,8 +36,24 @@ public class GatoUpgrade extends Upgrade {
         setLevelRequired(1, Level.ONE);
 
         this.tiersXKills.put(2, 2);
-        setPrice(2, 3000.0);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 2000.0);
+        setLevelRequired(2, Level.ONE);
+
+        this.tiersXKills.put(3, 3);
+        setPrice(3, 3000.0);
+        setLevelRequired(3, Level.ONE);
+
+        this.tiersXKills.put(4, 4);
+        setPrice(4, 4000.0);
+        setLevelRequired(4, Level.ONE);
+
+        this.tiersXKills.put(5, 5);
+        setPrice(5, 5000.0);
+        setLevelRequired(5, Level.ONE);
+
+        this.tiersXKills.put(6, 6);
+        setPrice(6, 7500.0);
+        setLevelRequired(6, Level.SEVENTY);
     }
 
     @Override
@@ -64,14 +80,16 @@ public class GatoUpgrade extends Upgrade {
 
     @Override
     public ItemStack getItemStack(Player player, Bank bank) {
+
         int playerTier = getTier(player);
         double tierPrice = getPrice(playerTier == getMaxTier() ? playerTier : playerTier + 1);
         int tierXKills = tiersXKills.get(playerTier == getMaxTier() ? playerTier : playerTier + 1);
+        boolean canBuy = bank.getBalance() >= tierPrice;
 
         ItemStack item = new ItemBuilder(Material.CAKE).build();
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(getDisplayName());
+        meta.setDisplayName((canBuy ? ChatColor.RED : ChatColor.GREEN) + getDisplayName());
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Bonus: " + getBonus(player));
@@ -91,7 +109,7 @@ public class GatoUpgrade extends Upgrade {
 
         if (playerTier == getMaxTier()) {
 
-            lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Vous avez atteint le dernier palier !");
+            lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Amélioration au dernier palier !");
             meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 

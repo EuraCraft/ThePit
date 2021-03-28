@@ -16,7 +16,7 @@ public class GoldBoostUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public GoldBoostUpgrade() {
-        super(UpgradeType.GOLD_BOOST, "goldboost", ChatColor.GOLD + "Boost Gold", ChatColor.GRAY + "Vous gagnez " + ChatColor.YELLOW + "10% de Gold" + ChatColor.GRAY + " supplémentaires", ChatColor.GRAY + "lorsque vous réalisez un meurtre, une", ChatColor.GRAY + "assistance ou que vous en ramassez au sol.");
+        super(UpgradeType.GOLD_BOOST, "goldboost", "Boost Gold", ChatColor.GRAY + "Vous gagnez " + ChatColor.YELLOW + "10% de Gold" + ChatColor.GRAY + " supplémentaires", ChatColor.GRAY + "lorsque vous réalisez un meurtre, une", ChatColor.GRAY + "assistance ou que vous en ramassez au sol.");
 
         tiersMultiplier = new HashMap<>();
 
@@ -25,8 +25,25 @@ public class GoldBoostUpgrade extends Upgrade {
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 20);
-        setPrice(2, 10000.0);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 2500.0);
+        setLevelRequired(2, Level.ONE);
+
+        tiersMultiplier.put(3, 30);
+        setPrice(3, 10000.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 40);
+        setPrice(4, 25000.0);
+        setLevelRequired(4, Level.SEVENTY);
+
+        tiersMultiplier.put(5, 50);
+        setPrice(5, 40000.0);
+        setLevelRequired(5, Level.SEVENTY);
+
+        tiersMultiplier.put(6, 60);
+        setPrice(6, 60000.0);
+        setLevelRequired(6, Level.SEVENTY);
+
     }
 
     @Override

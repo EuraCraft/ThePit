@@ -23,20 +23,32 @@ public class AssassinUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public AssassinUpgrade() {
-        super(UpgradeType.ASSASSIN, "assassin", ChatColor.LIGHT_PURPLE + "Assassin", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "1%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "au corps à corps.");
+        super(UpgradeType.ASSASSIN, "assassin", "Assassin", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "1%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "au corps à corps.");
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
-        setPrice(1, 1050.0);
+        setPrice(1, 450.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 2);
-        setPrice(2, 1500.0);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 1050.0);
+        setLevelRequired(2, Level.ONE);
 
-        tiersMultiplier.put(3, 2);
-        setPrice(3, 2250.0);
-        setLevelRequired(3, Level.TWO);
+        tiersMultiplier.put(3, 3);
+        setPrice(3, 1500.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 4);
+        setPrice(4, 2250.0);
+        setLevelRequired(4, Level.SEVENTY);
+
+        tiersMultiplier.put(5, 5);
+        setPrice(5, 3000.0);
+        setLevelRequired(5, Level.SEVENTY);
+
+        tiersMultiplier.put(6, 6);
+        setPrice(6, 4000.0);
+        setLevelRequired(6, Level.SEVENTY);
 
     }
     
@@ -70,10 +82,10 @@ public class AssassinUpgrade extends Upgrade {
         return 1 + (tiersMultiplier.get(tier) / 100.0);
     }
 
-    @EventHandler (priority = EventPriority.LOWEST)
+    @EventHandler (priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageByEntityEvent event) {
 
-        if (event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER || event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
+        if (event.isCancelled() || event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER || event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)
             return;
 
         Player player = (Player) event.getDamager();

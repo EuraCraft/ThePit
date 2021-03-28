@@ -22,7 +22,7 @@ public class TankUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public TankUpgrade() {
-        super(UpgradeType.TANK, "tank", ChatColor.BLUE + "Tank", ChatColor.GRAY + "Vous recevez " + ChatColor.DARK_AQUA + "1%" + ChatColor.GRAY + " de dégâts " + ChatColor.DARK_AQUA + "en moins", ChatColor.GRAY + "lorsqu'un joueur vous attaque.");
+        super(UpgradeType.TANK, "tank", "Tank", ChatColor.GRAY + "Vous recevez " + ChatColor.DARK_AQUA + "1%" + ChatColor.GRAY + " de dégâts " + ChatColor.DARK_AQUA + "en moins", ChatColor.GRAY + "lorsqu'un joueur vous attaque.");
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
@@ -30,12 +30,24 @@ public class TankUpgrade extends Upgrade {
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 2);
-        setPrice(2, 1500.0);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 1050.0);
+        setLevelRequired(2, Level.ONE);
 
         tiersMultiplier.put(3, 3);
-        setPrice(3, 2250.0); // 1500
-        setLevelRequired(3, Level.TWO);
+        setPrice(3, 1500.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 4);
+        setPrice(4, 2250.0);
+        setLevelRequired(4, Level.SEVENTY);
+
+        tiersMultiplier.put(5, 5);
+        setPrice(5, 3000.0);
+        setLevelRequired(5, Level.SEVENTY);
+
+        tiersMultiplier.put(6, 6);
+        setPrice(6, 4000.0);
+        setLevelRequired(6, Level.SEVENTY);
 
     }
 
@@ -71,10 +83,10 @@ public class TankUpgrade extends Upgrade {
         return 1 - (tiersMultiplier.get(tier) / 100.0);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageByEntityEvent event) {
 
-        if (event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER)
+        if (event.isCancelled() || event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER)
             return;
 
         Player player = (Player) event.getEntity();

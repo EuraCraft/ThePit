@@ -21,16 +21,33 @@ public class BuilderUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public BuilderUpgrade() {
-        super(UpgradeType.BUILDER, "builder", ChatColor.DARK_GREEN + "Constructeur", ChatColor.GRAY + "Vos blocs restent en vie " + ChatColor.GREEN + "60%" + ChatColor.GRAY + " plus", ChatColor.GRAY + "longtemps qu'avant.");
+        super(UpgradeType.BUILDER, "builder", "Constructeur", ChatColor.GRAY + "Vos blocs restent en vie " + ChatColor.GREEN + "60%" + ChatColor.GRAY + " plus", ChatColor.GRAY + "longtemps qu'avant.");
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 60);
-        setPrice(1, 1750);
+        setPrice(1, 750.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 120);
-        setPrice(2, 2750);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 1750.0);
+        setLevelRequired(2, Level.ONE);
+
+        tiersMultiplier.put(3, 180);
+        setPrice(3, 2750.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 240);
+        setPrice(4, 3750.0);
+        setLevelRequired(4, Level.SEVENTY);
+
+        tiersMultiplier.put(5, 300);
+        setPrice(5, 4750.0);
+        setLevelRequired(5, Level.SEVENTY);
+
+        tiersMultiplier.put(6, 360);
+        setPrice(6, 6000.0);
+        setLevelRequired(6, Level.SEVENTY);
+
     }
 
     @Override

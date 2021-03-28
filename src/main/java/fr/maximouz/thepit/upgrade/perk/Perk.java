@@ -16,7 +16,6 @@ import java.util.*;
 public abstract class Perk implements IPerk, Listener {
 
     private final PerkType type;
-    private final String name;
     private final String displayName;
     private final Material material;
     private final Level levelRequired;
@@ -26,9 +25,8 @@ public abstract class Perk implements IPerk, Listener {
     private final List<Player> playersBought;
     private final Map<Player, PerkSlot> playersSelected;
 
-    public Perk(PerkType type, String name, String displayName, Material material, Level levelRequired, double price, String... description) {
+    public Perk(PerkType type, String displayName, Material material, Level levelRequired, double price, String... description) {
         this.type = type;
-        this.name = name;
         this.displayName = displayName;
         this.material = material;
         this.levelRequired = levelRequired;
@@ -40,10 +38,6 @@ public abstract class Perk implements IPerk, Listener {
 
     public PerkType getType() {
         return type;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getDisplayName() {

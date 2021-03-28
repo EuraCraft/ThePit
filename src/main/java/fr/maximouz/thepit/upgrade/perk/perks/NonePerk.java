@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class NonePerk extends Perk {
 
     public NonePerk() {
-        super(PerkType.NONE, "none", ChatColor.RED + "Aucune compétence", Material.DIAMOND_BLOCK, Level.ONE, 0, ChatColor.GRAY + "Rétire la compétence de cet emplacement,", ChatColor.GRAY + "cependant vous devrez redoubler d'efforts lors", ChatColor.GRAY + "de vos combats !", "", ChatColor.YELLOW + "Clic gauche pour retirer la compétence.");
+        super(PerkType.NONE, ChatColor.RED + "Aucune compétence", Material.DIAMOND_BLOCK, Level.ONE, 0, ChatColor.GRAY + "Rétire la compétence de cet emplacement,", ChatColor.GRAY + "cependant vous devrez redoubler d'efforts lors", ChatColor.GRAY + "de vos combats !", "", ChatColor.YELLOW + "Clic gauche pour retirer la compétence.");
     }
 
     @Override

@@ -4,12 +4,12 @@ import fr.maximouz.thepit.bank.Level;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,16 +23,32 @@ public class SniperUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public SniperUpgrade() {
-        super(UpgradeType.SNIPER, "sniper", ChatColor.LIGHT_PURPLE + "Tireur d'élite", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "3%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "lorsque vous utilisez votre arc.");
+        super(UpgradeType.SNIPER, "sniper", "Tireur d'élite", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "3%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "lorsque vous utilisez votre arc.");
         tiersMultiplier = new HashMap<>();
 
-        tiersMultiplier.put(1, 3);
+        tiersMultiplier.put(1, 1);
         setPrice(1, 450.0);
         setLevelRequired(1, Level.ONE);
 
-        tiersMultiplier.put(2, 6);
-        setPrice(2, 20.0); // 1500
-        setLevelRequired(2, Level.TWO);
+        tiersMultiplier.put(2, 2);
+        setPrice(2, 1050.0);
+        setLevelRequired(2, Level.ONE);
+
+        tiersMultiplier.put(3, 3);
+        setPrice(3, 1500.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 4);
+        setPrice(4, 2250.0);
+        setLevelRequired(4, Level.SEVENTY);
+
+        tiersMultiplier.put(5, 5);
+        setPrice(5, 3000.0);
+        setLevelRequired(5, Level.SEVENTY);
+
+        tiersMultiplier.put(6, 6);
+        setPrice(6, 4000.0);
+        setLevelRequired(6, Level.SEVENTY);
 
     }
 
@@ -68,13 +84,13 @@ public class SniperUpgrade extends Upgrade {
         return 1 + (tiersMultiplier.get(tier) / 100.0);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onDamage(EntityDamageByEntityEvent event) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
-        if (event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER || event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE)
+        if (event.isCancelled() || event.getEntity().getType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.ARROW || !(((Arrow) event.getDamager()).getShooter() instanceof Player))
             return;
 
-        Player player = (Player) event.getDamager();
+        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
 
         int playerTier = getTier(player);
         if (playerTier > 0) {

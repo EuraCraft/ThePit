@@ -46,10 +46,9 @@ public class PlayerListener implements Listener {
         IEuraPlayer euraPlayer = EuraAPI.getInstance().getEuraPlayer(player.getUniqueId());
 
         BankManager.getInstance().loadBank(player);
+        player.teleport(ThePit.spawnPoint);
         if (!player.hasPlayedBefore())
             ThePit.getInstance().initPlayer(player);
-        else
-            player.teleport(ThePit.spawnPoint);
         // load stats
         PlayerStatisticsManager.getInstance().loadPlayerStatistic(player);
         // update kill streak
@@ -150,11 +149,10 @@ public class PlayerListener implements Listener {
             player.sendMessage("§c§lMORT! §r§7par§r " + killer.getDisplayName());
 
 
-            // Ajouter un kill au killer, mettre à jour sa série de meurtres et arrêter son status de combat
+            // Ajouter un kill au killer, mettre à jour sa série de meurtres
             PlayerStatistic killerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(killer);
             killerStatistic.addKill(player.getUniqueId(), System.currentTimeMillis());
             killerStatistic.updateKillStreak();
-            killerStatistic.cancelLastDamage();
 
             // Prévenir d'une éventuelle série de meurtres et ajouter une prime
             if (killerStatistic.getKillStreak() == 10 || killerStatistic.getKillStreak() == 15 || killerStatistic.getKillStreak() % 10 == 0) {
@@ -221,6 +219,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         ThePit.getInstance().initPlayer(event.getPlayer());
+        event.setRespawnLocation(ThePit.spawnPoint);
     }
     // On Player Drops Item
     @EventHandler
@@ -233,7 +232,7 @@ public class PlayerListener implements Listener {
             Item item = event.getItemDrop();
             ItemStack itemStack = item.getItemStack();
 
-            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.DIAMOND_SWORD && !(itemStack.getType().toString().contains("HELMET") || itemStack.getType().toString().contains("CHESTPLATE") || itemStack.getType().toString().contains("LEGGINGS") || itemStack.getType().toString().contains("BOOTS")) && !(itemStack.getType().toString().contains("IRON") || itemStack.getType().toString().contains("DIAMOND"))) {
+            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.DIAMOND_SWORD && !(itemStack.getType().toString().contains("CHESTPLATE") || itemStack.getType().toString().contains("LEGGINGS") || itemStack.getType().toString().contains("BOOTS")) && !(itemStack.getType().toString().contains("IRON") || itemStack.getType().toString().contains("DIAMOND"))) {
 
                  event.setCancelled(true);
 
@@ -331,7 +330,7 @@ public class PlayerListener implements Listener {
     }
 
     // On Damage
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent event) {
 
         if (event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER)

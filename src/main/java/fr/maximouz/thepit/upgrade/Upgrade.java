@@ -97,11 +97,12 @@ public abstract class Upgrade implements IUpgrade, Listener {
 
         int playerTier = getTier(player);
         double tierPrice = getPrice(playerTier == getMaxTier() ? playerTier : playerTier + 1);
+        boolean canBuy = bank.getBalance() >= tierPrice;
 
         ItemStack item = new ItemBuilder(Material.INK_SACK).setColor(getDyeColor()).build();
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(getDisplayName());
+        meta.setDisplayName((canBuy ? ChatColor.RED : ChatColor.GREEN) + getDisplayName());
 
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Bonus: " + getBonus(player));
@@ -113,7 +114,7 @@ public abstract class Upgrade implements IUpgrade, Listener {
 
         if (playerTier == getMaxTier()) {
 
-            lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Vous avez atteint le dernier palier !");
+            lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Amélioration au dernier palier !");
             meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 

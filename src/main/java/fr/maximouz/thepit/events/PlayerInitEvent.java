@@ -1,15 +1,16 @@
 package fr.maximouz.thepit.events;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerInitEvent extends Event {
+public class PlayerInitEvent extends PlayerEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private Location spawnPoint;
     private ItemStack sword;
     private ItemStack helmet;
     private ItemStack chestPlate;
@@ -17,8 +18,8 @@ public class PlayerInitEvent extends Event {
     private ItemStack boots;
     private ItemStack[] others;
 
-    public PlayerInitEvent(Location spawnPoint, ItemStack sword, ItemStack helmet, ItemStack chestPlate, ItemStack leggings, ItemStack boots, ItemStack... others) {
-        setSpawnPoint(spawnPoint);
+    public PlayerInitEvent(Player player, ItemStack sword, ItemStack helmet, ItemStack chestPlate, ItemStack leggings, ItemStack boots, ItemStack... others) {
+        super(player);
         setSword(sword);
         setHelmet(helmet);
         setChestPlate(chestPlate);
@@ -34,14 +35,6 @@ public class PlayerInitEvent extends Event {
 
     public static HandlerList getHandlerList() {
         return handlers;
-    }
-
-    public Location getSpawnPoint() {
-        return spawnPoint;
-    }
-
-    public void setSpawnPoint(Location spawnPoint) {
-        this.spawnPoint = spawnPoint;
     }
 
     public ItemStack getSword() {

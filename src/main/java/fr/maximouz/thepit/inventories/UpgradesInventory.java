@@ -63,11 +63,15 @@ public class UpgradesInventory extends AbstractInterface {
 
                 } else {
 
-                    if (perk.getMaterial() == Material.SKULL || perk.getMaterial() == Material.SKULL_ITEM) {
+                    if (perk.getMaterial() == Material.SKULL_ITEM) {
 
                         item = new ItemStack(perk.getMaterial(), 1, (byte) 3);
                         meta = item.getItemMeta();
                         SkinUtils.applyGoldenHead((SkullMeta) meta);
+
+                    } else {
+
+                        item.setType(perk.getMaterial());
 
                     }
 
@@ -162,6 +166,6 @@ public class UpgradesInventory extends AbstractInterface {
     @Override
     public void open() {
         super.open();
-        owner.sendMessage("§8[§4!§8] §cLes améliorations/compétences sont en cours de développement.");
+        owner.playSound(owner.getLocation(), Sound.VILLAGER_IDLE, 1f, 1f);
     }
 }

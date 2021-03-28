@@ -36,19 +36,20 @@ public class PerkChooseInventory extends AbstractInterface {
 
         List<Perk> selectedPerks = PerkManager.getInstance().getSelectedPerk(owner);
 
-        for (int i = 0; i <= Math.min(perkTypes.size() - 1, 6); i++) {
-            Perk perk = PerkManager.getInstance().getPerk(perkTypes.get(i));
-            this.setItem(i + 10, initPerkItem(perk, owner, bank, selectedPerks.contains(perk)), event -> buy(perk, owner, bank, perkSlot));
-        }
+        int index = 10;
 
-        if (perkTypes.size() > 6) {
-            for (int i = 0; i <= Math.min(perkTypes.size() - 1, 7); i++) {
+        while(!perkTypes.isEmpty()) {
 
-                Perk perk = PerkManager.getInstance().getPerk(perkTypes.get(i + 6));
-                this.setItem(i + 19, initPerkItem(perk, owner, bank, selectedPerks.contains(perk)), event -> buy(perk, owner, bank, perkSlot));
+            if (index == 17)
+                index = 19;
+            else if (index == 26)
+                break;
 
+            PerkType perkType = perkTypes.get(0);
+            Perk perk = PerkManager.getInstance().getPerk(perkType);
+            this.setItem(index++, initPerkItem(perk, owner, bank, selectedPerks.contains(perk)), event -> buy(perk, owner, bank, perkSlot));
+            perkTypes.remove(perkType);
 
-            }
         }
 
         ItemStack backItem = new ItemBuilder(Material.ARROW)
@@ -124,7 +125,6 @@ public class PerkChooseInventory extends AbstractInterface {
 
         if (perk.getLevelRequired().level <= bank.getLevel().level) {
 
-            meta.setDisplayName(perk.getDisplayName());
             List<String> lore = meta.getLore() != null ? meta.getLore() : new ArrayList<>();
             lore.add("");
 
@@ -132,20 +132,25 @@ public class PerkChooseInventory extends AbstractInterface {
 
                 if (selected) {
 
+                    meta.setDisplayName(ChatColor.GREEN + perk.getDisplayName());
                     meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                     lore.add(ChatColor.GREEN + "Compétence déjà sélectionnée !");
 
                 } else {
 
+                    meta.setDisplayName(ChatColor.YELLOW + perk.getDisplayName());
                     lore.add(ChatColor.YELLOW + "Clic gauche pour sélectionner !");
 
                 }
 
             } else {
 
+                boolean canBuy = bank.getBalance() >= perk.getPrice();
+
+                meta.setDisplayName((canBuy ? ChatColor.GREEN : ChatColor.RED) + perk.getDisplayName());
                 lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + Format.format(perk.getPrice()) + "g");
-                lore.add(bank.getBalance() >= perk.getPrice() ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
+                lore.add(canBuy ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
 
             }
 
@@ -154,7 +159,7 @@ public class PerkChooseInventory extends AbstractInterface {
         } else {
 
             meta.setDisplayName(ChatColor.RED + "Compétence inconnue");
-            meta.setLore(Collections.singletonList(ChatColor.GRAY + "Niveau requis: " + bank.getPrestige().getColor() + "[" + bank.getLevel() + bank.getPrestige().getColor() + "]"));
+            meta.setLore(Collections.singletonList(ChatColor.GRAY + "Niveau requis: " + bank.getPrestige().getColor() + "[" + perk.getLevelRequired().getLevel() + bank.getPrestige().getColor() + "]"));
             item.setType(Material.BEDROCK);
 
         }

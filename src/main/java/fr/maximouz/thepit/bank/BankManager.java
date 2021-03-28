@@ -25,7 +25,7 @@ public class BankManager {
      * @param player Player we want to load the bank
      */
     public void loadBank(Player player) {
-        banks.add(new Bank(player, 99999, 0, 0, Level.ONE, Prestige.ZERO));
+        banks.add(new Bank(player, 99999, 0, 0, Level.ONE_HUNDRED_AND_TWENTY, Prestige.FOUR));
     }
 
     /**

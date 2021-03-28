@@ -23,19 +23,14 @@ public class GoldenHeadsPerk extends Perk {
     private static final Class<?> humanClass = Reflection.getNMSClass("EntityHuman");
 
     public GoldenHeadsPerk() {
-        super(PerkType.GOLDEN_HEADS, "goldenheads", ChatColor.YELLOW + "Têtes en or", Material.SKULL_ITEM, Level.ONE, 1000, ChatColor.GRAY + "Les pommes dorées que vous gagnez", ChatColor.GRAY + "sont des " + ChatColor.YELLOW + "têtes en or " + ChatColor.GRAY + "qui se", ChatColor.GRAY + "consomment instantanément.");
+        super(PerkType.GOLDEN_HEADS, "Têtes en or", Material.SKULL_ITEM, Level.ONE, 1000, ChatColor.GRAY + "Les pommes dorées que vous gagnez", ChatColor.GRAY + "sont des " + ChatColor.YELLOW + "têtes en or " + ChatColor.GRAY + "qui se", ChatColor.GRAY + "consomment instantanément.");
     }
 
     @Override
-    public void load(Player player) {
-        buy(player);
-    }
+    public void load(Player player) {}
 
     @Override
-    public void save(Player player) {
-        removeSelect(player);
-        removeBought(player);
-    }
+    public void save(Player player) {}
 
     @Override
     public ItemStack getItemStack(Player player) {
@@ -61,7 +56,7 @@ public class GoldenHeadsPerk extends Perk {
     @Override
     public void onUnselect(Player player) {
 
-        player.getInventory().remove(Material.SKULL_ITEM);
+        player.getInventory().remove(getMaterial());
 
     }
 

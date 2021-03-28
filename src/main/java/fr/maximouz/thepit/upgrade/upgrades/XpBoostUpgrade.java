@@ -15,21 +15,33 @@ public class XpBoostUpgrade extends Upgrade {
     private final Map<Integer, Integer> tiersMultiplier;
 
     public XpBoostUpgrade() {
-        super(UpgradeType.XP_BOOST, "xpboost", ChatColor.DARK_AQUA + "Boost XP", ChatColor.GRAY + "Vous gagnez " + ChatColor.AQUA + "10% d'XP" + ChatColor.GRAY + " supplémentaires", ChatColor.GRAY + "lors de toutes les situations.");
+        super(UpgradeType.XP_BOOST, "xpboost", "Boost XP", ChatColor.GRAY + "Vous gagnez " + ChatColor.AQUA + "10% d'XP" + ChatColor.GRAY + " supplémentaires", ChatColor.GRAY + "lors de toutes les situations.");
 
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 10);
-        setPrice(1, 500.0);
+        setPrice(1, 1000.0);
         setLevelRequired(1, Level.ONE);
 
         tiersMultiplier.put(2, 20);
-        setPrice(2, 20.0);
-        setLevelRequired(2, Level.TWO);
+        setPrice(2, 2500.0);
+        setLevelRequired(2, Level.ONE);
 
         tiersMultiplier.put(3, 30);
-        setPrice(3, 20.0);
-        setLevelRequired(3, Level.EIGHTY);
+        setPrice(3, 5000.0);
+        setLevelRequired(3, Level.ONE);
+
+        tiersMultiplier.put(4, 40);
+        setPrice(4, 10000.0);
+        setLevelRequired(4, Level.EIGHTY);
+
+        tiersMultiplier.put(5, 50);
+        setPrice(5, 25000.0);
+        setLevelRequired(5, Level.EIGHTY);
+
+        tiersMultiplier.put(6, 60);
+        setPrice(6, 40000.0);
+        setLevelRequired(6, Level.EIGHTY);
     }
 
     @Override
