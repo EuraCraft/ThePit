@@ -13,7 +13,8 @@ public enum PerkType {
     ENDLESS_QUIVER(EndlessQuiverPerk.class),
     MINE_MAN(MineManPerk.class),
     SECURITY_FIRST(SecurityFirstPerk.class),
-    TRICKLE_DOWN(TrickleDownPerk.class);
+    TRICKLE_DOWN(TrickleDownPerk.class),
+    LUCKY_DIAMOND(LuckyDiamondPerk.class);
 
     private final Class<? extends Perk> clazz;
 

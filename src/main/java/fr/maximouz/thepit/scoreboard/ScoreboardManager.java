@@ -17,7 +17,7 @@ public class ScoreboardManager {
     public ScoreboardManager() {
         scoreboards = new HashMap<>();
 
-        updateTask = Bukkit.getScheduler().runTaskTimerAsynchronously(ThePit.getInstance(), () -> scoreboards.values().forEach(PersonalScoreboard::updateScoreBoard), 0L, 5);
+        updateTask = Bukkit.getScheduler().runTaskTimerAsynchronously(ThePit.getInstance(), () -> scoreboards.values().forEach(PersonalScoreboard::updateScoreBoard), 0L, 4L);
 
     }
 

@@ -17,6 +17,7 @@ import fr.maximouz.thepit.statistic.PlayerStatisticsManager;
 import fr.maximouz.thepit.tasks.ObsidianBreakTask;
 import fr.maximouz.thepit.tasks.PrimeParticleTask;
 import fr.maximouz.thepit.utils.Format;
+import fr.maximouz.thepit.utils.ItemStackUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -87,12 +88,23 @@ public class PlayerListener implements Listener {
 
         Player player = event.getEntity();
 
-        // Laisser tomber uniquement les armures en fer
+        // Laisser tomber uniquement certains items
         List<ItemStack> drops = new ArrayList<>(event.getDrops());
         drops.forEach(item -> {
 
-            if (item.getType() == Material.IRON_SWORD || !item.getType().toString().contains("IRON") || !item.getType().toString().contains("DIAMOND"))
+            if (ItemStackUtils.isIronArmorPiece(item) && player.getKiller() != null) {
+
+                PlayerDeathDropIronArmorPieceEvent pDDIAPEvent = new PlayerDeathDropIronArmorPieceEvent(player.getKiller(), item);
+                Bukkit.getPluginManager().callEvent(pDDIAPEvent);
+
+                if (pDDIAPEvent.isCancelled())
+                    item.setType(Material.AIR);
+
+            } else if (item.getType() != Material.DIAMOND_SWORD || !ItemStackUtils.isDiamondArmorPiece(item)) {
+
                 item.setType(Material.AIR);
+
+            }
 
         });
 
@@ -221,6 +233,7 @@ public class PlayerListener implements Listener {
         ThePit.getInstance().initPlayer(event.getPlayer());
         event.setRespawnLocation(ThePit.spawnPoint);
     }
+
     // On Player Drops Item
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
@@ -232,7 +245,7 @@ public class PlayerListener implements Listener {
             Item item = event.getItemDrop();
             ItemStack itemStack = item.getItemStack();
 
-            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.DIAMOND_SWORD && !(itemStack.getType().toString().contains("CHESTPLATE") || itemStack.getType().toString().contains("LEGGINGS") || itemStack.getType().toString().contains("BOOTS")) && !(itemStack.getType().toString().contains("IRON") || itemStack.getType().toString().contains("DIAMOND"))) {
+            if (itemStack.getType() != Material.ARROW && itemStack.getType() != Material.DIAMOND_SWORD && !ItemStackUtils.isIronArmorPiece(itemStack) && ItemStackUtils.isDiamondArmorPiece(itemStack)) {
 
                  event.setCancelled(true);
 
@@ -255,23 +268,8 @@ public class PlayerListener implements Listener {
 
             ItemStack item = event.getItem().getItemStack();
 
-            // Remplacer l'armure en maille par l'armure en fer ramassé
-            if (item.getType() == Material.IRON_CHESTPLATE && (player.getInventory().getChestplate() == null || player.getInventory().getChestplate().getType() == Material.CHAINMAIL_CHESTPLATE)) {
+            if (ItemStackUtils.equip(player, item, true)) {
 
-                player.getInventory().setChestplate(item);
-                player.playSound(player.getLocation(), Sound.HORSE_ARMOR, 1f, 1f);
-                event.getItem().remove();
-
-            } else if (item.getType() == Material.IRON_LEGGINGS && (player.getInventory().getLeggings() == null || player.getInventory().getLeggings().getType() == Material.CHAINMAIL_LEGGINGS)) {
-
-                player.getInventory().setLeggings(item);
-                player.playSound(player.getLocation(), Sound.HORSE_ARMOR, 1f, 1f);
-                event.getItem().remove();
-
-            } else if (item.getType() == Material.IRON_BOOTS && (player.getInventory().getBoots() == null || player.getInventory().getBoots().getType() == Material.CHAINMAIL_BOOTS)) {
-
-                player.getInventory().setBoots(item);
-                player.playSound(player.getLocation(), Sound.HORSE_ARMOR, 1f, 1f);
                 event.getItem().remove();
 
             } else if (item.getType() == Material.GOLD_INGOT) {
@@ -291,36 +289,15 @@ public class PlayerListener implements Listener {
                     player.sendMessage("§6§lGOLD! §r§7Ramassage au sol de §6" + amount + "g");
                     event.getItem().remove();
 
+                } else if (item.getType() == Material.ARROW || ItemStackUtils.isSword(item)) {
+
+                    event.getItem().remove();
+
                 } else {
 
                     event.setCancelled(true);
 
                 }
-
-            } else {
-
-                if (item.getType() != Material.IRON_HELMET && item.getType() != Material.IRON_CHESTPLATE && item.getType() != Material.IRON_LEGGINGS && item.getType() != Material.IRON_BOOTS) {
-
-                    event.setCancelled(false);
-                    return;
-
-                }
-
-                ItemStack[] contents = player.getInventory().getContents();
-
-                for (int i = 9; i < 36; i++) {
-
-                    if (contents[i] == null) {
-
-                        event.getItem().remove();
-                        player.getInventory().setItem(i, item);
-                        return;
-
-                    }
-
-                }
-
-                player.getInventory().addItem(item);
 
             }
 
