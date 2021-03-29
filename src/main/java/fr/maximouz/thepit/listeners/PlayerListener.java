@@ -156,7 +156,6 @@ public class PlayerListener implements Listener {
 
             // Prévenir d'une éventuelle série de meurtres et ajouter une prime
             if (killerStatistic.getKillStreak() == 10 || killerStatistic.getKillStreak() == 15 || killerStatistic.getKillStreak() % 10 == 0) {
-
                 Bukkit.broadcastMessage("§d§lSERIE! §7de §d" + killerStatistic.getKillStreak() + " meurtres §7par §r" + killer.getDisplayName());
                 Prime killerPrime = PrimeManager.getInstance().getPrime(killer);
 
@@ -167,11 +166,9 @@ public class PlayerListener implements Listener {
                     Bukkit.getPluginManager().callEvent(primeStartEvent);
 
                     if (!primeStartEvent.isCancelled()) {
-
                         PrimeManager.getInstance().createPrime(killerPrime);
                         Bukkit.broadcastMessage("§6§lPRIME! §7de §650.0g §7sur§r " + killer.getDisplayName() + " §7pour sa série de meurtres élevée");
-                        new PrimeParticleTask(killer, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 1L);
-
+                        new PrimeParticleTask(killer, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 5L);
                     }
                 } else {
 

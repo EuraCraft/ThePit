@@ -88,7 +88,7 @@ public class WorldUtils {
     }
 
     public static Vector getBackDirection(Location location) {
-        return location.getDirection().normalize().multiply(-0.4);
+        return location.getDirection().normalize().multiply(-1.4);
     }
 
     public static Vector getFrontDirection(Location location) {
