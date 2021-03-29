@@ -36,11 +36,7 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-<<<<<<< HEAD
             <id>euracraft-repo</id>
-=======
-            <id>myMavenRepoApi</id>
->>>>>>> 24974b5ef702f101bf5a7f1b67df9d06036f118e
             <url>https://mymavenrepo.com/repo/YB1knbKWEgS14z6WmIh0/</url>
         </repository>
     </repositories>
