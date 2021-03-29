@@ -21,25 +21,17 @@ public class PrimeParticleTask extends BukkitRunnable {
         this.prime = prime;
     }
 
-
     @Override
     public void run() {
-
         Bukkit.getOnlinePlayers().forEach(target -> {
-
             if (target != player) {
-
                 if (!PrimeManager.getInstance().getPrimes().contains(prime)) {
                     cancel();
                     return;
                 }
-
-                spawn(target, player.getLocation().add(WorldUtils.getBackDirection(player.getLocation())));
-
+                spawn(target, player.getLocation().add(WorldUtils.getBackDirection(player.getLocation())).add(Math.random()*2-1, 0, Math.random()*2-1));
             }
-
         });
-
     }
 
     private void spawn(Player target, Location location) {
@@ -76,17 +68,13 @@ public class PrimeParticleTask extends BukkitRunnable {
             Reflection.sendPacket(target, teleportPacket);
 
             Bukkit.getScheduler().runTaskLater(ThePit.getInstance(), () -> {
-
                 try {
-
                     Object destroyPacket = Reflection.callConstructor(Reflection.getConstructor(Reflection.getNMSClass("PacketPlayOutEntityDestroy"), int[].class), new int[] { id });
                     Reflection.sendPacket(target, destroyPacket);
-
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 }
-
-            }, 10L);
+            }, 5L);
 
         } catch (NoSuchMethodException | NoSuchFieldException e) {
             e.printStackTrace();
