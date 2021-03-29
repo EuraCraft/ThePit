@@ -55,7 +55,7 @@
             <artifactId>bukkit</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/libs/craftbukkit-1.8.8.jar</systemPath>
+            <systemPath>${project.basedir}/libs/craftbukkit-1.8.8.jar</systemPath>
         </dependency>
         <!-- EuraAPI -->
         <dependency>
