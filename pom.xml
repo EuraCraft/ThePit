@@ -35,6 +35,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>myMavenRepoApi</id>
+            <url>https://mymavenrepo.com/repo/YB1knbKWEgS14z6WmIh0/</url>
+        </repository>
     </repositories>
 
     <dependencies>
