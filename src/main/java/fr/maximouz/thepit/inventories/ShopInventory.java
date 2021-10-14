@@ -4,13 +4,15 @@ import fr.euracraft.api.gui.AbstractInterface;
 import fr.euracraft.api.item.ItemBuilder;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.items.AntiBountiedItem;
-import fr.maximouz.thepit.items.TemporaryObsidianItem;
+import fr.maximouz.thepit.items.TemporaryBlockItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+
+import java.math.BigDecimal;
 
 public class ShopInventory extends AbstractInterface {
 
@@ -27,16 +29,16 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "si vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: " + ChatColor.YELLOW + "150g",
-                            bank.getBalance() >= 150 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
+                            ChatColor.GRAY + "Prix: §6150g",
+                            bank.getBalance().compareTo(BigDecimal.valueOf(150)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             this.setItem(11, item, event -> {
 
-                double price = 150.0;
+                BigDecimal price = BigDecimal.valueOf(150.0);
 
-                if (bank.getBalance() >= price) {
+                if (bank.getBalance().compareTo(price) >= 0) {
 
                     if (owner.getInventory().firstEmpty() != -1 || owner.getInventory().contains(Material.IRON_SWORD)) {
 
@@ -69,22 +71,22 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: " + ChatColor.YELLOW + "50g",
-                            bank.getBalance() >= 50 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
+                            ChatColor.GRAY + "Prix: §650g",
+                            bank.getBalance().compareTo(BigDecimal.valueOf(50)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).build();
 
             this.setItem(12, item, event -> {
 
-                double price = 50.0;
+                BigDecimal price = BigDecimal.valueOf(50.0);
 
-                if (bank.getBalance() >= price) {
+                if (bank.getBalance().compareTo(price) >= 0) {
 
                     if (owner.getInventory().firstEmpty() != -1) {
 
                         bank.withdraw(price);
-                        owner.getInventory().addItem(new TemporaryObsidianItem(8).build());
+                        owner.getInventory().addItem(new TemporaryBlockItem(Material.OBSIDIAN, 8, 120).build());
                         owner.playSound(owner.getLocation(), Sound.NOTE_PLING, 1f, 1f);
-                        owner.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "ACHAT! " + ChatColor.YELLOW + "8 Obsidiennes");
+                        owner.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "ACHAT! §e8 Obsidiennes");
 
                     } else {
 
@@ -109,16 +111,16 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: " + ChatColor.YELLOW + "500g",
-                            bank.getBalance() >= 500 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
+                            ChatColor.GRAY + "Prix: §6500g",
+                            bank.getBalance().compareTo(BigDecimal.valueOf(500)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             this.setItem(14, item, event -> {
 
-                double price = 500;
+                BigDecimal price = BigDecimal.valueOf(500);
 
-                if (bank.getBalance() >= price) {
+                if (bank.getBalance().compareTo(price) >= 1) {
 
                     if (owner.getInventory().firstEmpty() != -1) {
 
@@ -165,14 +167,14 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: " + ChatColor.YELLOW + "300g",
-                            bank.getBalance() >= 300 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
+                            ChatColor.GRAY + "Prix: §6300g",
+                            bank.getBalance().compareTo(BigDecimal.valueOf(300)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
 
             this.setItem(15, item, event -> {
 
-                if (bank.getBalance() >= 300) {
+                if (bank.getBalance().compareTo(BigDecimal.valueOf(300)) >= 0) {
 
                     if (owner.getInventory().firstEmpty() != -1) {
 

@@ -2,6 +2,7 @@ package fr.maximouz.thepit.prime;
 
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,24 +24,11 @@ public class PrimeManager {
         return primes;
     }
 
-    public void loadPrime(Player player) {
-        // TODO: Charger une prime en bdd
-    }
-
-    public void savePrime(Player player) {
-        Prime prime = getPrime(player);
-        if (prime != null) {
-
-            primes.remove(prime);
-            // TODO: Sauvegarder une prime en bdd
-
-        }
-    }
-
     public void createPrime(Prime prime) {
         primes.add(prime);
     }
-    public void createPrime(Player player, double defaultGold) {
+
+    public void createPrime(Player player, BigDecimal defaultGold) {
         createPrime(new Prime(player, defaultGold));
     }
 
@@ -52,7 +40,7 @@ public class PrimeManager {
         return primes.stream().filter(prime -> prime.getPlayer().getUniqueId() == player.getUniqueId()).findFirst().orElse(null);
     }
 
-    public boolean isBountied(Player player) {
+    public boolean hasBounty(Player player) {
         return primes.stream().anyMatch(prime -> prime.getPlayer().getUniqueId() == player.getUniqueId());
     }
 

@@ -21,8 +21,8 @@ public class TankUpgrade extends Upgrade {
      */
     private final Map<Integer, Integer> tiersMultiplier;
 
-    public TankUpgrade() {
-        super(UpgradeType.TANK, "tank", "Tank", ChatColor.GRAY + "Vous recevez " + ChatColor.DARK_AQUA + "1%" + ChatColor.GRAY + " de dégâts " + ChatColor.DARK_AQUA + "en moins", ChatColor.GRAY + "lorsqu'un joueur vous attaque.");
+    public TankUpgrade(UpgradeType type) {
+        super(type);
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
@@ -45,9 +45,9 @@ public class TankUpgrade extends Upgrade {
         setPrice(5, 3000.0);
         setLevelRequired(5, Level.SEVENTY);
 
-        tiersMultiplier.put(6, 6);
+        /*tiersMultiplier.put(6, 6);
         setPrice(6, 4000.0);
-        setLevelRequired(6, Level.SEVENTY);
+        setLevelRequired(6, Level.SEVENTY);*/
 
     }
 
@@ -83,7 +83,7 @@ public class TankUpgrade extends Upgrade {
         return 1 - (tiersMultiplier.get(tier) / 100.0);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onDamage(EntityDamageByEntityEvent event) {
 
         if (event.isCancelled() || event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER)

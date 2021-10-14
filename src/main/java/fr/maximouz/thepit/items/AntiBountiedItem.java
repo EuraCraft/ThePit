@@ -24,7 +24,7 @@ public class AntiBountiedItem extends ItemBuilder {
 
             Player damaged = (Player) event.getEntity();
 
-            if (PrimeManager.getInstance().isBountied(damaged)) {
+            if (PrimeManager.getInstance().hasBounty(damaged)) {
 
                 event.setDamage(event.getDamage() * 1.20);
 

@@ -35,7 +35,7 @@ public class DisplayNameManager {
         player.setPlayerListName(prefix + player.getName() + primeText);
         // Above Head
         Tag playerTag = TagManager.getInstance().getTag(player);
-        String priority = bank.getPrestige().getPriority() + bank.getLevel().getPriority();
+        String priority = bank.getLevel().getPriority();
         if (playerTag == null) {
             playerTag = new Tag(player, prefix, priority, primeText);
             TagManager.getInstance().getTags().add(playerTag);

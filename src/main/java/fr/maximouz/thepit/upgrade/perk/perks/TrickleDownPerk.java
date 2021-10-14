@@ -2,38 +2,31 @@ package fr.maximouz.thepit.upgrade.perk.perks;
 
 import fr.euracraft.api.util.SymbolUtil;
 import fr.maximouz.thepit.bank.Level;
-import fr.maximouz.thepit.events.EarnGoldEvent;
-import fr.maximouz.thepit.events.EarnReason;
+import fr.maximouz.thepit.events.PickupGoldEvent;
 import fr.maximouz.thepit.upgrade.perk.Perk;
 import fr.maximouz.thepit.upgrade.perk.PerkType;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
+import java.math.BigDecimal;
+
 public class TrickleDownPerk extends Perk {
 
     public TrickleDownPerk() {
-        super(PerkType.TRICKLE_DOWN, "Jackpot", Material.GOLD_INGOT, Level.THIRTY, 3000, ChatColor.GRAY + "Les lingots d'or rapportent " + ChatColor.GOLD + "10g " + ChatColor.GRAY + "en plus", ChatColor.GRAY + "et vous soigne " + ChatColor.RED + "2" + SymbolUtil.HEARTH + ChatColor.GRAY + ".");
+        super(PerkType.TRICKLE_DOWN, "Jackpot", Material.GOLD_INGOT, Level.THIRTY, 3000,
+                "§7Les lingots d'or rapportent §610g§7 en plus",
+                "§7et vous soigne §c2" + SymbolUtil.HEARTH + "§7.");
     }
 
-    @Override
-    public void load(Player player) {}
-
-    @Override
-    public void save(Player player) {}
-
     @EventHandler
-    public void onPickupGold(EarnGoldEvent event) {
-
-        if (event.getReason() != EarnReason.PICK_UP)
-            return;
+    public void onPickupGold(PickupGoldEvent event) {
 
         if (hasSelected(event.getPlayer())) {
 
-            event.setAmount(event.getAmount() + 10);
+            event.setGoldReward(event.getGoldReward().add(BigDecimal.valueOf(10)));
             Player player = event.getPlayer();
-            player.setHealth(Math.min(player.getHealth() + 4, 20));
+            player.setHealth(Math.min(player.getMaxHealth(), player.getHealth() + 4));
 
         }
 

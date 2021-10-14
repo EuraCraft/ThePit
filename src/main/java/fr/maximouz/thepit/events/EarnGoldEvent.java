@@ -1,35 +1,29 @@
 package fr.maximouz.thepit.events;
 
 import fr.maximouz.thepit.bank.Bank;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
 
-public class EarnGoldEvent extends PlayerEvent implements Cancellable {
+import java.math.BigDecimal;
+
+public class EarnGoldEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private boolean cancelled = false;
 
-    private final EarnReason reason;
     private final Bank bank;
-    private double amount;
+    private final BigDecimal amount;
 
-    public EarnGoldEvent(EarnReason reason, Player player, Bank bank, double amount) {
-        super(player);
-        this.reason = reason;
+    public EarnGoldEvent(Bank bank, BigDecimal amount) {
         this.bank = bank;
         this.amount = amount;
     }
 
-    @Override
-    public boolean isCancelled() {
-        return cancelled;
+    public Bank getBank() {
+        return bank;
     }
 
-    @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     @Override
@@ -41,19 +35,4 @@ public class EarnGoldEvent extends PlayerEvent implements Cancellable {
         return handlers;
     }
 
-    public EarnReason getReason() {
-        return reason;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 }

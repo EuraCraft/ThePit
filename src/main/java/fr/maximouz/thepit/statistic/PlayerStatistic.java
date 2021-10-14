@@ -1,30 +1,42 @@
 package fr.maximouz.thepit.statistic;
 
+import fr.maximouz.thepit.ThePit;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class PlayerStatistic {
 
     private final Player player;
-    private final List<PlayerKill> kills;
-    private final List<PlayerDeath> deaths;
-    private final List<PlayerPlaySession> playSessions;
-
-    private long lastDamage;
+    private long kills;
+    private long assists;
+    private long deaths;
     private long killStreak;
+    private final List<PlayerPlaySession> playSessions;
+    private final long connectedAt;
+
+    private final Map<Player, Double> damages;
+    private final Map<Player, List<Material>> damageItemsUsed;
+
+    private long lastAttackDate;
+    private BukkitTask fightingEndTask;
 
     public PlayerStatistic(Player player) {
         this.player = player;
-        this.kills = new ArrayList<>();
-        this.deaths = new ArrayList<>();
-        this.playSessions = new ArrayList<>();
-        this.lastDamage = System.currentTimeMillis() - 160000;
+        kills = 0L;
+        assists = 0L;
+        deaths = 0L;
+        killStreak = 0L;
+        playSessions = new ArrayList<>();
+        lastAttackDate = System.currentTimeMillis() - 160000;
+        damages = new HashMap<>();
+        damageItemsUsed = new HashMap<>();
+        fightingEndTask = null;
+        connectedAt = System.currentTimeMillis();
     }
 
 
@@ -32,24 +44,36 @@ public class PlayerStatistic {
         return player;
     }
 
-    public List<PlayerKill> getKills() {
+    public long getKills() {
         return kills;
     }
 
-    public void addKill(PlayerKill kill) {
-        this.kills.add(kill);
+    public void setKills(long kills) {
+        this.kills = kills;
     }
 
-    public void addKill(UUID victim, long date) {
-        addKill(new PlayerKill(player.getUniqueId(), victim, date));
+    public long getAssists() {
+        return assists;
     }
 
-    public void addDeath(PlayerDeath death) {
-        this.deaths.add(death);
+    public void setAssists(long assists) {
+        this.assists = assists;
     }
 
-    public void addDeath(UUID killer, long date) {
-        addDeath(new PlayerDeath(player.getUniqueId(), killer, date));
+    public long getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(long deaths) {
+        this.deaths = deaths;
+    }
+
+    public long getKillStreak() {
+        return killStreak;
+    }
+
+    public void setKillStreak(long killStreak) {
+        this.killStreak = killStreak;
     }
 
     public List<PlayerPlaySession> getPlaySessions() {
@@ -60,65 +84,63 @@ public class PlayerStatistic {
         this.playSessions.add(playSession);
     }
 
-    public void addPlayerSession(long start, long end) {
+    public void addPlaySession(long start, long end) {
         addPlaySession(new PlayerPlaySession(player.getUniqueId(), start, end));
+    }
+
+    public long getConnectedAt() {
+        return connectedAt;
+    }
+
+    public void damage(Player player, double damage, Material itemUsed) {
+        damages.put(player, getDamage(player) + damage);
+        List<Material> materials = damageItemsUsed.getOrDefault(player, new ArrayList<>());
+        materials.add(itemUsed);
+        damageItemsUsed.put(player, materials);
+    }
+
+    public double getDamage(Player player) {
+        return damages.getOrDefault(player, 0.0);
+    }
+
+    public List<Material> getDamageItemUsed(Player player) {
+        return damageItemsUsed.getOrDefault(player, new ArrayList<>());
+    }
+
+    public void resetDamage(Player target) {
+        damages.remove(target);
+        damageItemsUsed.remove(target);
     }
 
     public boolean hasDisconnectSince(long date) {
         return playSessions.stream().anyMatch(playSession ->  playSession.getEnd() >= date);
     }
 
-    public List<PlayerKill> getKillsSince(long date) {
-        return kills.stream().filter(kill -> kill.getDate() >= date).collect(Collectors.toList());
-    }
-
-    public void updateKillStreak() {
-
-        PlayerDeath lastDeath = getLastDeath();
-        long lastDeathDate = lastDeath != null ? lastDeath.getDate() : -1;
-
-        this.killStreak = getKillsSince(lastDeathDate).stream()
-                .filter(kill -> !hasDisconnectSince(kill.getDate()))
-                .count();
-    }
-
-    public long getKillStreak() {
-        return killStreak;
-    }
-
     public PlayerStatus getStatus() {
-        return TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - lastDamage) >= 15 ? PlayerStatus.IDLING : PlayerStatus.FIGHTING;
+        return TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - lastAttackDate) >= 15 ? PlayerStatus.IDLING : PlayerStatus.FIGHTING;
     }
 
-    public void damage() {
-        this.lastDamage = System.currentTimeMillis();
+    public void setLastAttackDate(long lastAttackDate) {
+        this.lastAttackDate = lastAttackDate;
+        if (fightingEndTask != null)
+            fightingEndTask.cancel();
+        fightingEndTask = Bukkit.getScheduler().runTaskLater(ThePit.getInstance(), () -> {
+            PlayerStatisticsManager.getInstance().removeAssistsDamage(player);
+            fightingEndTask = null;
+        }, 20 * TimeUnit.MILLISECONDS.toSeconds(getFightingTimeLeft()));
     }
 
-    public long getLastDamage() {
-        return lastDamage;
+    public long getLastAttackDate() {
+        return lastAttackDate;
     }
 
     public void cancelLastDamage() {
-        this.lastDamage = System.currentTimeMillis() - 160000;
+        lastAttackDate = System.currentTimeMillis() - 160000;
     }
 
     public long getFightingTimeLeft() {
-        return Math.abs((System.currentTimeMillis() - lastDamage) - 15000);
+        return Math.abs((System.currentTimeMillis() - getLastAttackDate()) - 15000);
     }
 
-    public PlayerDeath getLastDeath() {
-
-        PlayerDeath lastDeath = null;
-
-        if (deaths.size() > 0) {
-
-            lastDeath = deaths.stream().max(Comparator.comparingLong(PlayerDeath::getDate)).get();
-
-
-        }
-
-        return lastDeath;
-
-    }
 
 }

@@ -1,47 +1,64 @@
 package fr.maximouz.thepit.bank;
 
-import org.bukkit.Sound;
+import fr.maximouz.thepit.events.EarnExperienceEvent;
+import fr.maximouz.thepit.events.EarnGoldEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.UUID;
 
 public class Bank {
 
-    private final Player owner;
-    private double balance;
-    private double experience;
-    private double previousExperience;
+    private final UUID owner;
+    private BigDecimal balance;
+    private BigDecimal experience;
+    private BigDecimal renown;
+    private BigDecimal previousExperience;
 
     private Level level;
-    private double nextLevelExperience;
+    private BigDecimal nextLevelExperience;
     private Prestige prestige;
 
-    public Bank(Player owner, double balance, double experience, double previousExperience, Level level, Prestige prestige) {
+    public Bank(UUID owner, BigDecimal balance, BigDecimal experience, BigDecimal renown, BigDecimal previousExperience, BigDecimal nextLevelExperience, Level level, Prestige prestige) {
         this.owner = owner;
         this.balance = balance;
         this.experience = experience;
+        this.renown = renown;
         this.previousExperience = previousExperience;
+        this.nextLevelExperience = nextLevelExperience;
 
-        setNextLevelExperience(experience + Level.getLevel(level.level + 1).expRequired);
         setLevel(level);
         setPrestige(prestige);
-        updateExpBar();
+        updateExpBar(getPlayer());
+    }
+
+    public Bank(UUID owner, double balance, double experience, double renown, double previousExperience, double nextLevelExperience, Level level, Prestige prestige) {
+        this(owner, BigDecimal.valueOf(balance), BigDecimal.valueOf(experience), BigDecimal.valueOf(renown), BigDecimal.valueOf(previousExperience), BigDecimal.valueOf(nextLevelExperience), level, prestige);
     }
 
     /**
      * Récupérer le possesseur de ce compte
      * @return Player owning the account
      */
-    public Player getOwner() {
+    public UUID getOwner() {
         return owner;
+    }
+
+    /**
+     * Récupérer l'objet Player
+     * @return Player owning the account
+     */
+    public Player getPlayer() {
+        return Bukkit.getPlayer(owner);
     }
 
     /**
      * Récupérer l'argent du joueur
      * @return double
      */
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
@@ -49,16 +66,26 @@ public class Bank {
      * Définir l'argent du joueur
      * @param balance New balance
      */
-    public void setBalance(double balance) {
-        this.balance = BigDecimal.valueOf(balance).setScale(1, RoundingMode.HALF_UP).doubleValue();
+    public void setBalance(BigDecimal balance) {
+        Bukkit.getPluginManager().callEvent(new EarnGoldEvent(this, balance.subtract(this.balance)));
+        System.out.print(getPlayer().getName() + "'s bank balance change : " + balance.subtract(this.balance));
+        this.balance = balance;
     }
 
     /**
      * Ajouter de l'argent
      * @param amount Amount to add in account
      */
-    public void pay(double amount) {
-        this.balance = Math.min(balance + amount, Double.MAX_VALUE);
+    public void pay(BigDecimal amount) {
+        setBalance(balance.add(amount));
+    }
+
+    /**
+     * Retirer de l'argent
+     * @param amount Amount to withdraw in account
+     */
+    public void withdraw(BigDecimal amount) {
+        setBalance(balance.subtract(amount));
     }
 
     /**
@@ -66,14 +93,14 @@ public class Bank {
      * @param amount Amount to withdraw in account
      */
     public void withdraw(double amount) {
-        this.balance = Math.max(balance - amount, 0);
+        withdraw(BigDecimal.valueOf(amount));
     }
 
     /**
      * Récupérer l'xp du joueur
-     * @return Double
+     * @return player's experience
      */
-    public double getExperience() {
+    public BigDecimal getExperience() {
         return experience;
     }
 
@@ -81,13 +108,45 @@ public class Bank {
      * Définir l'xp du joueur
      * @param experience New xp
      */
-    public void setExperience(double experience) {
-        this.previousExperience = this.experience;
+    private void setExperience(BigDecimal experience) {
         this.experience = experience;
-        if (experience >= nextLevelExperience) {
-            setLevel(Level.getLevel(getLevel().level + 1));
+    }
+
+    /**
+     * Ajouter de l'xp au joueur
+     * @param experience xp to add
+     * @return nombre de niveaux passés par le joueur
+     */
+    public void addExperience(BigDecimal experience) {
+        addExperience(experience, experience, 0);
+    }
+
+    private void addExperience(BigDecimal currentExp, BigDecimal totalExp, int levelPassed) {
+        this.previousExperience = this.experience;
+
+        if (level != Level.ONE_HUNDRED_AND_TWENTY && this.experience.add(currentExp).compareTo(nextLevelExperience) >= 0) {
+
+            BigDecimal experienceToAdd = nextLevelExperience.subtract(this.experience);
+            Level nextLevel = level.getNextLevel();
+            setLevel(nextLevel);
+
+            setExperience(this.experience.add(experienceToAdd));
+            setNextLevelExperience(this.experience.add(nextLevel.expRequired));
+
+            BigDecimal rest = currentExp.subtract(experienceToAdd);
+
+            if (rest.compareTo(BigDecimal.ZERO) > 0)
+                addExperience(rest, totalExp, levelPassed + 1);
+            else
+                Bukkit.getPluginManager().callEvent(new EarnExperienceEvent(this, totalExp, levelPassed + 1));
+
+        } else {
+
+            setExperience(this.experience.add(currentExp));
+            Bukkit.getPluginManager().callEvent(new EarnExperienceEvent(this, totalExp, levelPassed));
+
         }
-        updateExpBar();
+
     }
 
     /**
@@ -103,28 +162,22 @@ public class Bank {
      * @param level nouveau niveau
      */
     public void setLevel(Level level) {
-        if (this.level != null && this.level != level) {
-            setNextLevelExperience(experience + Level.getLevel(getLevel().level + 1).expRequired);
-            if (this.level.level < level.level) {
-                owner.playSound(owner.getLocation(), Sound.LEVEL_UP, 1f, 1f);
-            }
-        }
         this.level = level;
     }
 
     /**
      * Récuperer l'xp à atteindre pour passer au niveau suivant
-     * @return double
+     * @return BigDecimal
      */
-    public double getNextLevelExperience() {
+    public BigDecimal getNextLevelExperience() {
         return nextLevelExperience;
     }
 
     /**
      * Définir l'xp à atteindre pour passer au niveau suivant
      */
-    private void setNextLevelExperience(double nextLevelExperience) {
-        this.nextLevelExperience = nextLevelExperience;
+    private void setNextLevelExperience(BigDecimal nextLevelExperience) {
+        this.nextLevelExperience = nextLevelExperience.multiply(new BigDecimal(1 + prestige.getXpNeededMultiplier() / 100));
     }
 
     /**
@@ -143,8 +196,9 @@ public class Bank {
         this.prestige = prestige;
     }
 
-    public void updateExpBar() {
-        owner.setLevel(level.level);
-        owner.setExp((float) ((experience - previousExperience) / (nextLevelExperience - previousExperience)));
+    public void updateExpBar(Player player) {
+        player.setLevel(level.level);
+        float exp = experience.subtract(previousExperience).divide(nextLevelExperience.subtract(previousExperience), 2, RoundingMode.HALF_UP).floatValue();
+        player.setExp(Math.min(1f, exp));
     }
 }

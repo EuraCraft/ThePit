@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PlayerStatisticsManager {
 
-    private static PlayerStatisticsManager INSTANCE = new PlayerStatisticsManager();
+    private static final PlayerStatisticsManager INSTANCE = new PlayerStatisticsManager();
 
     private final List<PlayerStatistic> playerStatistics;
 
@@ -27,8 +27,12 @@ public class PlayerStatisticsManager {
         this.playerStatistics.add(new PlayerStatistic(player));
     }
 
+    public void savePlayerStatistic(PlayerStatistic playerStatistic) {
+        this.playerStatistics.remove(playerStatistic);
+    }
+
     public void savePlayerStatistic(Player player) {
-        this.playerStatistics.remove(getPlayerStatistic(player));
+        savePlayerStatistic(getPlayerStatistic(player));
     }
 
     public PlayerStatistic getPlayerStatistic(Player player) {
@@ -36,6 +40,36 @@ public class PlayerStatisticsManager {
                 .filter(playerStatistic -> playerStatistic.getPlayer().getUniqueId() == player.getUniqueId())
                 .findFirst()
                 .orElse(null);
+    }
+
+    public double getDamageTaken(Player player) {
+        double damage = 0;
+
+        for (PlayerStatistic playerStatistic : playerStatistics) {
+
+            if (playerStatistic.getPlayer() != player) {
+
+                damage += playerStatistic.getDamage(player);
+            }
+
+        }
+
+        return damage;
+    }
+
+    public void removeAssistsDamage(PlayerStatistic playerStatistic) {
+
+        playerStatistics.forEach(statistic -> {
+
+            if (statistic != playerStatistic)
+                statistic.resetDamage(playerStatistic.getPlayer());
+
+        });
+
+    }
+
+    public void removeAssistsDamage(Player player) {
+        removeAssistsDamage(getPlayerStatistic(player));
     }
 
     /*public long getLastDeathDate(Player player) {

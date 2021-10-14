@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -596,7 +597,28 @@ public class Cuboid implements Iterable<Block>, Cloneable, ConfigurationSerializ
 
     @Override
     public String toString() {
-        return new String("Cuboid: " + this.worldName + "," + this.x1 + "," + this.y1 + "," + this.z1 + "=>" + this.x2 + "," + this.y2 + "," + this.z2);
+        return this.worldName + "," + this.x1 + "," + this.y1 + "," + this.z1 + "=>" + this.x2 + "," + this.y2 + "," + this.z2;
+    }
+
+    public static Cuboid fromString(String cuboid) {
+        String[] parts = cuboid.split(Pattern.quote("=>"));
+
+        String[] firstPart = parts[0].split(Pattern.quote(","));
+
+        String worldName = firstPart[0];
+        int x1 = Integer.parseInt(firstPart[1]);
+        int y1 = Integer.parseInt(firstPart[2]);
+        int z1 = Integer.parseInt(firstPart[3]);
+
+        String[] secondPart = parts[1].split(Pattern.quote(","));
+
+        int x2 = Integer.parseInt(secondPart[0]);
+        int y2 = Integer.parseInt(secondPart[1]);
+        int z2 = Integer.parseInt(secondPart[2]);
+
+        World world = Bukkit.getWorld(worldName);
+
+        return new Cuboid(world, x1, y1, z1, x2, y2, z2);
     }
 
     public class CuboidIterator implements Iterator<Block> {

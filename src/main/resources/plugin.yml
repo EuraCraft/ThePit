@@ -7,4 +7,11 @@ main: fr.maximouz.thepit.ThePit
 depend:
   - EuraCore
 commands:
-  tag:
+  area:
+    aliases:
+      - areas
+  spawnpoint:
+    aliases:
+      - spawnpoints
+      - sp
+      - sps

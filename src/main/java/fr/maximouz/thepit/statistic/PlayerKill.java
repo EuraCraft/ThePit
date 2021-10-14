@@ -7,11 +7,13 @@ public class PlayerKill {
     private final UUID player;
     private final UUID victim;
     private final long date;
+    private final boolean care;
 
-    public PlayerKill(UUID player, UUID victim, long date) {
+    public PlayerKill(UUID player, UUID victim, long date, boolean care) {
         this.player = player;
         this.victim = victim;
         this.date = date;
+        this.care = care;
     }
 
     public UUID getPlayer() {
@@ -24,6 +26,10 @@ public class PlayerKill {
 
     public long getDate() {
         return date;
+    }
+
+    public boolean doCare() {
+        return care;
     }
 
 }

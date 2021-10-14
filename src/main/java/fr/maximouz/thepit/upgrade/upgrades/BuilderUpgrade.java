@@ -1,7 +1,7 @@
 package fr.maximouz.thepit.upgrade.upgrades;
 
 import fr.maximouz.thepit.bank.Level;
-import fr.maximouz.thepit.events.ObsidianPlaceEvent;
+import fr.maximouz.thepit.events.TempBlockPlaceEvent;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
 import fr.maximouz.thepit.utils.Format;
@@ -20,33 +20,33 @@ public class BuilderUpgrade extends Upgrade {
      */
     private final Map<Integer, Integer> tiersMultiplier;
 
-    public BuilderUpgrade() {
-        super(UpgradeType.BUILDER, "builder", "Constructeur", ChatColor.GRAY + "Vos blocs restent en vie " + ChatColor.GREEN + "60%" + ChatColor.GRAY + " plus", ChatColor.GRAY + "longtemps qu'avant.");
+    public BuilderUpgrade(UpgradeType type) {
+        super(type);
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 60);
         setPrice(1, 750.0);
         setLevelRequired(1, Level.ONE);
 
-        tiersMultiplier.put(2, 120);
+        tiersMultiplier.put(2, 96);
         setPrice(2, 1750.0);
         setLevelRequired(2, Level.ONE);
 
-        tiersMultiplier.put(3, 180);
+        tiersMultiplier.put(3, 154);
         setPrice(3, 2750.0);
         setLevelRequired(3, Level.ONE);
 
-        tiersMultiplier.put(4, 240);
+        tiersMultiplier.put(4, 245);
         setPrice(4, 3750.0);
         setLevelRequired(4, Level.SEVENTY);
 
-        tiersMultiplier.put(5, 300);
+        tiersMultiplier.put(5, 393);
         setPrice(5, 4750.0);
         setLevelRequired(5, Level.SEVENTY);
 
-        tiersMultiplier.put(6, 360);
+        /*tiersMultiplier.put(6, 360);
         setPrice(6, 6000.0);
-        setLevelRequired(6, Level.SEVENTY);
+        setLevelRequired(6, Level.SEVENTY);*/
 
     }
 
@@ -83,7 +83,7 @@ public class BuilderUpgrade extends Upgrade {
     }
 
     @EventHandler
-    public void onObsiPlace(ObsidianPlaceEvent event) {
+    public void onTempBlockPlace(TempBlockPlaceEvent event) {
 
         Player player = event.getPlayer();
         int playerTier = getTier(player);

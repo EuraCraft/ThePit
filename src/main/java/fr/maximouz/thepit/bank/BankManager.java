@@ -25,7 +25,8 @@ public class BankManager {
      * @param player Player we want to load the bank
      */
     public void loadBank(Player player) {
-        banks.add(new Bank(player, 99999, 0, 0, Level.ONE_HUNDRED_AND_TWENTY, Prestige.FOUR));
+        // TODO: load from db
+        banks.add(new Bank(player.getUniqueId(), 0, 0, 0, 0, 5, Level.ONE, Prestige.ZERO));
     }
 
     /**
@@ -34,7 +35,7 @@ public class BankManager {
      */
     public void saveBank(Player player) {
         Bank bank = getBank(player);
-        // save in db
+        // TODO: save in db
         banks.remove(bank);
     }
 
@@ -45,7 +46,7 @@ public class BankManager {
      */
     public Bank getBank(UUID uuid) {
         return banks.stream()
-                .filter(bank -> bank.getOwner().getUniqueId() == uuid)
+                .filter(bank -> bank.getOwner() == uuid)
                 .findFirst()
                 .orElse(null);
     }

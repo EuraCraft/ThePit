@@ -5,7 +5,6 @@ import fr.maximouz.thepit.utils.Reflection;
 
 public enum PerkType {
 
-    NONE(NonePerk.class),
     GOLDEN_HEADS(GoldenHeadsPerk.class),
     FISHING_ROD(FishingRodPerk.class),
     LAVA_BUCKET(LavaBucketPerk.class),
@@ -14,7 +13,12 @@ public enum PerkType {
     MINE_MAN(MineManPerk.class),
     SECURITY_FIRST(SecurityFirstPerk.class),
     TRICKLE_DOWN(TrickleDownPerk.class),
-    LUCKY_DIAMOND(LuckyDiamondPerk.class);
+    LUCKY_DIAMOND(LuckyDiamondPerk.class),
+    SPAMMER(SpammerPerk.class),
+    BOUNTY_HUNTER(BountyHunterPerk.class),
+    STREAKER(StreakerPerk.class),
+    GLADIATOR(GladiatorPerk.class),
+    VAMPIRE(VampirePerk.class);
 
     private final Class<? extends Perk> clazz;
 

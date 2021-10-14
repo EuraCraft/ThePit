@@ -1,0 +1,632 @@
+[13:41:45] [main/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13:41:46] [main/INFO]: Reloading ResourceManager: Default, bukkit
+[13:41:46] [Worker-Main-9/INFO]: Loaded 7 recipes
+[13:41:48] [Server thread/INFO]: Starting minecraft server version 1.16.5
+[13:41:48] [Server thread/INFO]: Loading properties
+[13:41:48] [Server thread/INFO]: This server is running CraftBukkit version 2991-Spigot-018b9a0-f3f3094 (MC: 1.16.5) (Implementing API version 1.16.5-R0.1-SNAPSHOT)
+[13:41:48] [Server thread/INFO]: Debug logging is disabled
+[13:41:48] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[13:41:48] [Server thread/INFO]: Using 4 threads for Netty based IO
+[13:41:48] [Server thread/INFO]: Default game type: SURVIVAL
+[13:41:48] [Server thread/INFO]: Generating keypair
+[13:41:49] [Server thread/INFO]: Starting Minecraft server on 127.0.0.1:25566
+[13:41:49] [Server thread/INFO]: Using epoll channel type
+[13:41:49] [Server thread/WARN]: Ambiguous plugin name `WorldEdit'. It is also provided by `FastAsyncWorldEdit'
+[13:41:49] [Server thread/WARN]: [FastAsyncWorldEdit] Loaded class com.sk89q.worldedit.bukkit.WorldEditPlugin from WorldEdit v7.2.4+5723-e3bfc64 which is not a depend, softdepend or loadbefore of this plugin.
+[13:41:49] [Server thread/ERROR]: Could not load 'plugins/FastAsyncWorldEdit-Bukkit-1.16-659.jar' in folder 'plugins'
+org.bukkit.plugin.InvalidPluginException: java.lang.IllegalArgumentException: Plugin already initialized!
+	at org.bukkit.plugin.java.JavaPluginLoader.loadPlugin(JavaPluginLoader.java:139) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.SimplePluginManager.loadPlugin(SimplePluginManager.java:394) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.SimplePluginManager.loadPlugins(SimplePluginManager.java:301) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.craftbukkit.v1_16_R3.CraftServer.loadPlugins(CraftServer.java:383) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at net.minecraft.server.v1_16_R3.DedicatedServer.init(DedicatedServer.java:185) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at net.minecraft.server.v1_16_R3.MinecraftServer.w(MinecraftServer.java:809) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at net.minecraft.server.v1_16_R3.MinecraftServer.lambda$0(MinecraftServer.java:164) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+Caused by: java.lang.IllegalArgumentException: Plugin already initialized!
+	at org.bukkit.plugin.java.PluginClassLoader.initialize(PluginClassLoader.java:199) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.java.JavaPlugin.<init>(JavaPlugin.java:52) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at com.sk89q.worldedit.bukkit.WorldEditPlugin.<init>(WorldEditPlugin.java:98) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at java.lang.Class.newInstance(Class.java:584) ~[?:?]
+	at org.bukkit.plugin.java.PluginClassLoader.<init>(PluginClassLoader.java:76) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.java.JavaPluginLoader.loadPlugin(JavaPluginLoader.java:135) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	... 7 more
+Caused by: java.lang.IllegalStateException: Initial initialization
+	at org.bukkit.plugin.java.PluginClassLoader.initialize(PluginClassLoader.java:202) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.java.JavaPlugin.<init>(JavaPlugin.java:52) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at com.sk89q.worldedit.bukkit.WorldEditPlugin.<init>(WorldEditPlugin.java:98) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at java.lang.Class.newInstance(Class.java:584) ~[?:?]
+	at org.bukkit.plugin.java.PluginClassLoader.<init>(PluginClassLoader.java:76) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	at org.bukkit.plugin.java.JavaPluginLoader.loadPlugin(JavaPluginLoader.java:135) ~[spigot-1.16.5.jar:2991-Spigot-018b9a0-f3f3094]
+	... 7 more
+[13:41:50] [Server thread/WARN]: Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!
+[13:41:53] [Server thread/WARN]: Legacy plugin ColoredSigns v4.2.0 does not specify an api-version.
+[13:41:53] [Server thread/WARN]: Legacy plugin ColoredAnvils v1.08 does not specify an api-version.
+[13:41:53] [Server thread/INFO]: [Citizens] Loading Citizens v2.0.27-SNAPSHOT (build 2286)
+[13:41:53] [Server thread/INFO]: [WorldEdit] Loading WorldEdit v7.2.4+5723-e3bfc64
+[13:41:54] [Server thread/INFO]: Got request to register class com.sk89q.worldedit.bukkit.BukkitServerInterface with WorldEdit [com.sk89q.worldedit.extension.platform.PlatformManager@3f50d6d8]
+[13:41:54] [Server thread/INFO]: [ImageMaps] Loading ImageMaps v1.0.6
+[13:41:54] [Server thread/INFO]: [Colored Signs] Loading ColoredSigns v4.2.0
+[13:41:54] [Server thread/INFO]: [HeadDatabase] Loading HeadDatabase v4.13.5
+[13:41:54] [Server thread/INFO]: [Quests] Loading Quests v4.0.2-b237
+[13:41:54] [Server thread/INFO]: [VoidGenerator] Loading VoidGenerator v1.7.0
+[13:41:54] [Server thread/INFO]: [ColoredAnvils] Loading ColoredAnvils v1.08
+[13:41:54] [Server thread/INFO]: [Multiverse-Core] Loading Multiverse-Core v4.2.2-b812
+[13:41:54] [Server thread/INFO]: [Multiverse-Portals] Loading Multiverse-Portals v4.2.1-b834
+[13:41:54] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v7.2.4+5723-e3bfc64
+[13:41:54] [Server thread/INFO]: WEPIF: Using the Bukkit Permissions API.
+[13:41:54] [Server thread/INFO]: Using com.sk89q.worldedit.bukkit.adapter.impl.Spigot_v1_16_R3 as the Bukkit adapter
+[13:41:55] [Server thread/INFO]: [WorldEdit] ====================================================
+[13:41:55] [Server thread/INFO]: [WorldEdit]  WorldEdit works better if you use Paper 
+[13:41:55] [Server thread/INFO]: [WorldEdit]  as your server software. 
+[13:41:55] [Server thread/INFO]: [WorldEdit]   
+[13:41:55] [Server thread/INFO]: [WorldEdit]  Paper offers significant performance improvements,
+[13:41:55] [Server thread/INFO]: [WorldEdit]  bug fixes, security enhancements and optional
+[13:41:55] [Server thread/INFO]: [WorldEdit]  features for server owners to enhance their server.
+[13:41:55] [Server thread/INFO]: [WorldEdit]   
+[13:41:55] [Server thread/INFO]: [WorldEdit]  Paper includes Timings v2, which is significantly
+[13:41:55] [Server thread/INFO]: [WorldEdit]  better at diagnosing lag problems over v1.
+[13:41:55] [Server thread/INFO]: [WorldEdit]   
+[13:41:55] [Server thread/INFO]: [WorldEdit]  All of your plugins should still work, and the
+[13:41:55] [Server thread/INFO]: [WorldEdit]  Paper community will gladly help you fix any issues.
+[13:41:55] [Server thread/INFO]: [WorldEdit]   
+[13:41:55] [Server thread/INFO]: [WorldEdit]  Join the Paper Community @ https://papermc.io
+[13:41:55] [Server thread/INFO]: [WorldEdit] ====================================================
+[13:41:55] [Server thread/INFO]: [VoidGenerator] Enabling VoidGenerator v1.7.0
+[13:41:55] [Server thread/INFO]: [VoidGenerator] v1_15
+[13:41:55] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[13:41:55] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[13:41:55] [Server thread/WARN]: Whilst this makes it possible to use BungeeCord, unless access to your server is properly restricted, it also opens up the ability for hackers to connect with any username they choose.
+[13:41:55] [Server thread/WARN]: Please see http://www.spigotmc.org/wiki/firewall-guide/ for further information.
+[13:41:55] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[13:41:55] [Server thread/INFO]: Preparing level "END"
+[13:41:55] [Server thread/INFO]: -------- World Settings For [END] --------
+[13:41:55] [Server thread/INFO]: Mob Spawn Range: 6
+[13:41:55] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:41:55] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:41:55] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:41:55] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:41:55] [Server thread/INFO]: Max TNT Explosions: 100
+[13:41:55] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:41:55] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:41:55] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:41:55] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:41:55] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:41:55] [Server thread/INFO]: View Distance: 10
+[13:41:55] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:41:55] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:41:55] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:41:55] [Server thread/INFO]: Registering commands with com.sk89q.worldedit.bukkit.BukkitServerInterface
+[13:41:55] [Server thread/INFO]: -------- World Settings For [END_nether] --------
+[13:41:55] [Server thread/INFO]: Mob Spawn Range: 6
+[13:41:55] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:41:55] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:41:55] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:41:55] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:41:55] [Server thread/INFO]: Max TNT Explosions: 100
+[13:41:55] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:41:55] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:41:55] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:41:55] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:41:55] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:41:55] [Server thread/INFO]: View Distance: 10
+[13:41:55] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:41:55] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:41:55] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:41:55] [Server thread/INFO]: -------- World Settings For [END_the_end] --------
+[13:41:55] [Server thread/INFO]: Mob Spawn Range: 6
+[13:41:55] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:41:55] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:41:55] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:41:55] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:41:55] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:41:55] [Server thread/INFO]: Max TNT Explosions: 100
+[13:41:55] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:41:55] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:41:55] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:41:55] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:41:55] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:41:55] [Server thread/INFO]: View Distance: 10
+[13:41:55] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:41:55] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:41:55] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:41:55] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[13:41:56] [Server thread/INFO]: Preparing spawn area: 0%
+[13:41:56] [Server thread/INFO]: Preparing spawn area: 0%
+[13:41:56] [Server thread/INFO]: Preparing spawn area: 0%
+[13:41:57] [Server thread/INFO]: Preparing spawn area: 55%
+[13:41:59] [Worker-Main-9/INFO]: Preparing spawn area: 83%
+[13:41:59] [Worker-Main-10/INFO]: Preparing spawn area: 83%
+[13:41:59] [Worker-Main-8/INFO]: Preparing spawn area: 83%
+[13:41:59] [Worker-Main-8/INFO]: Preparing spawn area: 83%
+[13:41:59] [Worker-Main-9/INFO]: Preparing spawn area: 89%
+[13:42:00] [Worker-Main-13/INFO]: Preparing spawn area: 89%
+[13:42:00] [Worker-Main-9/INFO]: Preparing spawn area: 89%
+[13:42:01] [Worker-Main-11/INFO]: Preparing spawn area: 96%
+[13:42:01] [Server thread/INFO]: Time elapsed: 5705 ms
+[13:42:01] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[13:42:02] [Server thread/INFO]: Preparing spawn area: 0%
+[13:42:02] [Server thread/INFO]: Preparing spawn area: 0%
+[13:42:02] [Worker-Main-11/INFO]: Preparing spawn area: 83%
+[13:42:03] [Worker-Main-11/INFO]: Preparing spawn area: 83%
+[13:42:03] [Worker-Main-9/INFO]: Preparing spawn area: 84%
+[13:42:04] [Worker-Main-9/INFO]: Preparing spawn area: 91%
+[13:42:04] [Server thread/INFO]: Preparing spawn area: 99%
+[13:42:04] [Server thread/INFO]: Time elapsed: 3020 ms
+[13:42:04] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[13:42:04] [Server thread/INFO]: Preparing spawn area: 0%
+[13:42:04] [Server thread/INFO]: Time elapsed: 393 ms
+[13:42:04] [Server thread/INFO]: [Citizens] Enabling Citizens v2.0.27-SNAPSHOT (build 2286)
+[13:42:05] [Server thread/INFO]: [Citizens] Vault not found -> no economy handling.
+[13:42:05] [Server thread/INFO]: [ImageMaps] Enabling ImageMaps v1.0.6
+[13:42:05] [Server thread/INFO]: [Colored Signs] Enabling ColoredSigns v4.2.0
+[13:42:05] [Server thread/INFO]: [HeadDatabase] Enabling HeadDatabase v4.13.5
+[13:42:05] [Server thread/INFO]: [HeadDatabase] §bUsing default §3"en_US.lang" §bcreated by §6Arcaniax
+[13:42:05] [Server thread/WARN]: [HeadDatabase] Economy was not loaded, some features will be disabled!
+[13:42:05] [Server thread/INFO]: [Quests] Enabling Quests v4.0.2-b237
+[13:42:06] [Server thread/INFO]: [Quests] Loaded language en-US. Translations via Crowdin
+[13:42:06] [Server thread/INFO]: [Quests] Successfully linked Quests with Citizens 2.0.27-SNAPSHOT (build 2286)
+[13:42:06] [Server thread/INFO]: [Quests] Loading storage implementation: YAML
+[13:42:06] [Server thread/INFO]: [ColoredAnvils] Enabling ColoredAnvils v1.08
+[13:42:06] [Server thread/INFO]: [ColoredAnvils] ColoredAnvils v1.08 has been enabled!
+[13:42:06] [Server thread/INFO]: [ColoredAnvils] Permissions for ColoredAnvils are disabled.
+[13:42:06] [Server thread/INFO]: [Multiverse-Core] Enabling Multiverse-Core v4.2.2-b812
+[13:42:06] [Server thread/WARN]: [Multiverse-Core] "Multiverse-Core v4.2.2-b812" has registered a listener for org.bukkit.event.entity.EntityCreatePortalEvent on method "public void com.onarandombox.MultiverseCore.listeners.MVPortalListener.entityPortalCreate(org.bukkit.event.entity.EntityCreatePortalEvent)", but the event is Deprecated. "Server performance will be affected"; please notify the authors [dumptruckman, Rigby, fernferret, lithium3141, main--].
+[13:42:06] [Server thread/INFO]: [Multiverse-Core] §aWe are aware of the warning about the deprecated event. There is no alternative that allows us to do what we need to do and performance impact is negligible. It is safe to ignore.
+[13:42:06] [Server thread/INFO]: [Multiverse-Core] 3 - World(s) loaded.
+[13:42:06] [Server thread/WARN]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[13:42:06] [Server thread/INFO]: [Multiverse-Core] Version 4.2.2-b812 (API v24) Enabled - By dumptruckman, Rigby, fernferret, lithium3141 and main--
+[13:42:06] [Server thread/INFO]: [Multiverse-Portals] Enabling Multiverse-Portals v4.2.1-b834
+[13:42:06] [Server thread/INFO]: [Multiverse-Portals] 0 - Portals(s) loaded
+[13:42:06] [Server thread/INFO]: [Multiverse-Portals] Found WorldEdit. Using it for selections.
+[13:42:06] [Server thread/INFO]: [Multiverse-Portals 4.2.1-b834]  Enabled - By Rigby and fernferret
+[13:42:06] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[13:42:06] [Server thread/INFO]: Done (11.365s)! For help, type "help"
+[13:42:06] [Server thread/INFO]: [Citizens] Loaded 0 NPCs.
+[13:42:06] [Server thread/INFO]: [Quests] Loaded 4 Quest(s), 8 Action(s), 1 Condition(s) and 807 Phrase(s)
+[13:42:06] [Server thread/INFO]: Gamerule sendCommandFeedback is now set to: false
+[13:42:07] [Craft Scheduler Thread - 0/INFO]: [HeadDatabase] Succesfully loaded 36128 heads!
+[13:42:07] [Craft Scheduler Thread - 0/INFO]: [HeadDatabase] Successfully loaded 18 featured tags!
+[13:42:29] [User Authenticator #1/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:42:29] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:43421] logged in with entity id 366 at ([END]163.5, 67.0, -40.5)
+[13:42:38] [Async Chat Thread - #0/INFO]: [[0;37;1mEND[0;37;1m]<THE_BATTEUR> aa[m
+[13:43:11] [User Authenticator #2/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[13:43:11] [Server thread/INFO]: Maximouz[/176.151.246.18:47783] logged in with entity id 476 at ([END_the_end]368.8792797500318, 112.0, -78.68777020895055)
+[13:43:16] [Server thread/INFO]: Maximouz issued server command: /gamemode creative
+[13:43:16] [Server thread/INFO]: [Maximouz: Set own game mode to Creative Mode]
+[13:43:21] [Server thread/INFO]: Maximouz issued server command: /op THE_BATTEUR
+[13:43:21] [Server thread/INFO]: [Maximouz: Made THE_BATTEUR a server operator]
+[13:43:25] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[13:43:25] [Server thread/INFO]: Maximouz left the game
+[13:43:36] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:43:36] [Server thread/INFO]: THE_BATTEUR left the game
+[13:43:49] [User Authenticator #3/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[13:43:49] [Server thread/INFO]: Maximouz[/176.151.246.18:47267] logged in with entity id 658 at ([END_the_end]376.37611532176027, 132.5007847726486, -68.4797847930232)
+[13:43:51] [User Authenticator #4/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:43:51] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:57497] logged in with entity id 659 at ([END]-0.30227131080923525, 65.0, 0.48687150312321803)
+[13:43:59] [Server thread/INFO]: THE_BATTEUR issued server command: /plugins
+[13:44:28] [Server thread/INFO]: Maximouz issued server command: /gamemode creative
+[13:44:28] [Server thread/INFO]: [Maximouz: Set own game mode to Creative Mode]
+[13:44:53] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[13:44:53] [Server thread/INFO]: Maximouz left the game
+[13:47:57] [User Authenticator #5/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[13:47:57] [Server thread/INFO]: LaCeinture[/176.180.3.172:38195] logged in with entity id 998 at ([END_the_end]373.4253306376993, 158.0, 25.935225601906957)
+[13:48:20] [Server thread/INFO]: LaCeinture issued server command: /gamemode creative
+[13:48:20] [Server thread/INFO]: [LaCeinture: Set own game mode to Creative Mode]
+[13:48:28] [Server thread/INFO]: LaCeinture issued server command: /plugins
+[13:48:42] [Server thread/INFO]: LaCeinture issued server command: //repl 1
+[13:48:44] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:48:44] [Server thread/INFO]: THE_BATTEUR left the game
+[13:48:44] [Server thread/INFO]: LaCeinture lost connection: Disconnected
+[13:48:44] [Server thread/INFO]: LaCeinture left the game
+[13:49:50] [User Authenticator #6/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:49:50] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:59355] logged in with entity id 1067 at ([END]0.699999988079071, 65.0, 0.699999988079071)
+[13:51:38] [User Authenticator #7/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[13:51:38] [Server thread/INFO]: LaCeinture[/176.180.3.172:48555] logged in with entity id 1193 at ([END_the_end]398.51249998807907, 158.0, 26.214971991634656)
+[13:51:45] [Server thread/INFO]: LaCeinture issued server command: /plugins
+[13:51:51] [Async Chat Thread - #1/INFO]: [[0;37;1mEND[0;37;1m]<THE_BATTEUR> J'vais reboot le bungee[m
+[13:51:56] [Server thread/INFO]: LaCeinture lost connection: Disconnected
+[13:51:56] [Server thread/INFO]: LaCeinture left the game
+[13:52:02] [User Authenticator #8/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[13:52:02] [Server thread/INFO]: Maximouz[/176.151.246.18:48163] logged in with entity id 1220 at ([END_the_end]374.8075912776398, 218.0, -49.66718696463614)
+[13:52:11] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:52:11] [Server thread/INFO]: THE_BATTEUR left the game
+[13:52:11] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[13:52:11] [Server thread/INFO]: Maximouz left the game
+[13:52:22] [User Authenticator #9/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:52:22] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:33553] logged in with entity id 1230 at ([END]0.699999988079071, 65.0, 0.699999988079071)
+[13:52:45] [User Authenticator #10/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[13:52:45] [Server thread/INFO]: Maximouz[/176.151.246.18:57809] logged in with entity id 1260 at ([END_the_end]392.6902215492994, 216.0, -64.6188222919597)
+[13:52:49] [Server thread/INFO]: Maximouz issued server command: /tp THE_BATTEUR
+[13:52:49] [Server thread/INFO]: [Maximouz: Teleported Maximouz to THE_BATTEUR]
+[13:52:51] [Server thread/INFO]: Maximouz issued server command: /gamemode creative
+[13:52:51] [Server thread/INFO]: [Maximouz: Set own game mode to Creative Mode]
+[13:53:21] [Server thread/INFO]: Maximouz issued server command: /setworldspawn
+[13:53:21] [Server thread/INFO]: [Maximouz: Set the world spawn point to -2, 78, -71 [0.0]]
+[13:53:28] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[13:53:28] [Server thread/INFO]: Maximouz left the game
+[13:53:47] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:53:47] [Server thread/INFO]: THE_BATTEUR left the game
+[13:53:59] [User Authenticator #11/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:53:59] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:51745] logged in with entity id 1401 at ([END]0.699999988079071, 65.0, -0.5688519597927179)
+[13:54:11] [User Authenticator #12/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[13:54:11] [Server thread/INFO]: Maximouz[/176.151.246.18:39547] logged in with entity id 1419 at ([END]-7.912196262539568, 89.36392144883804, -73.72946912276197)
+[13:54:14] [Server thread/INFO]: Maximouz issued server command: /gamemode creative
+[13:54:14] [Server thread/INFO]: [Maximouz: Set own game mode to Creative Mode]
+[13:54:14] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:54:14] [Server thread/INFO]: THE_BATTEUR left the game
+[13:54:51] [User Authenticator #13/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[13:54:51] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:38057] logged in with entity id 1651 at ([END]0.699999988079071, 65.0, -0.676636140459921)
+[13:54:56] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[13:54:56] [Server thread/INFO]: Maximouz left the game
+[13:54:58] [Server thread/INFO]: THE_BATTEUR issued server command: /gamemode 1
+[13:55:01] [Server thread/INFO]: THE_BATTEUR issued server command: /gamemode creative
+[13:55:01] [Server thread/INFO]: [THE_BATTEUR: Set own game mode to Creative Mode]
+[13:55:33] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[13:55:33] [Server thread/INFO]: THE_BATTEUR left the game
+[13:57:03] [User Authenticator #14/INFO]: UUID of player Hephaisto_ is 8fd46598-2558-48ed-96ca-ca48f65c988c
+[13:57:03] [Server thread/INFO]: Hephaisto_[/109.24.165.189:36037] logged in with entity id 1808 at ([END_the_end]309.0655081647378, 151.6297503409578, 9.22016941577681)
+[13:57:08] [Server thread/INFO]: Hephaisto_ issued server command: /rl
+[13:57:08] [Server thread/INFO]: Hephaisto_: [0;31;1mPlease note that this command is not supported and may cause issues when using some plugins.[m
+[13:57:08] [Server thread/INFO]: Hephaisto_: [0;31;1mIf you encounter any issues please use the /stop command to restart your server.[m
+[13:57:08] [Server thread/INFO]: Debug logging is disabled
+[13:57:08] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[13:57:08] [Server thread/INFO]: Using 4 threads for Netty based IO
+[13:57:08] [Server thread/INFO]: -------- World Settings For [END] --------
+[13:57:08] [Server thread/INFO]: Mob Spawn Range: 6
+[13:57:08] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:57:08] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:57:08] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:57:08] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:57:08] [Server thread/INFO]: Max TNT Explosions: 100
+[13:57:08] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:57:08] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:57:08] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:57:08] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:57:08] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:57:08] [Server thread/INFO]: View Distance: 10
+[13:57:08] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:57:08] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:57:08] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:57:08] [Server thread/INFO]: -------- World Settings For [END_nether] --------
+[13:57:08] [Server thread/INFO]: Mob Spawn Range: 6
+[13:57:08] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:57:08] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:57:08] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:57:08] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:57:08] [Server thread/INFO]: Max TNT Explosions: 100
+[13:57:08] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:57:08] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:57:08] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:57:08] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:57:08] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:57:08] [Server thread/INFO]: View Distance: 10
+[13:57:08] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:57:08] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:57:08] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:57:08] [Server thread/INFO]: -------- World Settings For [END_the_end] --------
+[13:57:08] [Server thread/INFO]: Mob Spawn Range: 6
+[13:57:08] [Server thread/INFO]: Experience Merge Radius: 3.0
+[13:57:08] [Server thread/INFO]: Cactus Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cane Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Melon Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Mushroom Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Pumpkin Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Sapling Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Beetroot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Carrot Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Potato Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Wheat Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: NetherWart Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Vine Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Cocoa Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Bamboo Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: SweetBerry Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Kelp Growth Modifier: 100%
+[13:57:08] [Server thread/INFO]: Entity Activation Range: An 32 / Mo 32 / Ra 48 / Mi 16 / Tiv true
+[13:57:08] [Server thread/INFO]: Hopper Transfer: 8 Hopper Check: 1 Hopper Amount: 1
+[13:57:08] [Server thread/INFO]: Custom Map Seeds:  Village: 10387312 Desert: 14357617 Igloo: 14357618 Jungle: 14357619 Swamp: 14357620 Monument: 10387313 Ocean: 14357621 Shipwreck: 165745295 End City: 10387313 Slime: 987234911 Bastion: 30084232 Fortress: 30084232 Mansion: 10387319 Fossil: 14357921 Portal: 34222645
+[13:57:08] [Server thread/INFO]: Max TNT Explosions: 100
+[13:57:08] [Server thread/INFO]: Tile Max Tick Time: 50ms Entity max Tick Time: 50ms
+[13:57:08] [Server thread/INFO]: Entity Tracking Range: Pl 48 / An 48 / Mo 48 / Mi 32 / Other 64
+[13:57:08] [Server thread/INFO]: Allow Zombie Pigmen to spawn from portal blocks: true
+[13:57:08] [Server thread/INFO]: Item Despawn Rate: 6000
+[13:57:08] [Server thread/INFO]: Item Merge Radius: 2.5
+[13:57:08] [Server thread/INFO]: View Distance: 10
+[13:57:08] [Server thread/INFO]: Arrow Despawn Rate: 1200 Trident Respawn Rate:1200
+[13:57:08] [Server thread/INFO]: Zombie Aggressive Towards Villager: true
+[13:57:08] [Server thread/INFO]: Nerfing mobs spawned from spawners: false
+[13:57:08] [Server thread/INFO]: [Multiverse-Portals] Disabling Multiverse-Portals v4.2.1-b834
+[13:57:08] [Server thread/INFO]: [Multiverse-Core] Disabling Multiverse-Core v4.2.2-b812
+[13:57:08] [Server thread/INFO]: [ColoredAnvils] Disabling ColoredAnvils v1.08
+[13:57:08] [Server thread/INFO]: [ColoredAnvils] ColoredAnvils v1.08 has been disabled!
+[13:57:08] [Server thread/INFO]: [VoidGenerator] Disabling VoidGenerator v1.7.0
+[13:57:08] [Server thread/INFO]: [Quests] Disabling Quests v4.0.2-b237
+[13:57:08] [Server thread/INFO]: [Quests] Saving Quester data...
+[13:57:08] [Server thread/INFO]: [Quests] Closing storage...
+[13:57:08] [Server thread/INFO]: [HeadDatabase] Disabling HeadDatabase v4.13.5
+[13:57:08] [Server thread/INFO]: [Colored Signs] Disabling ColoredSigns v4.2.0
+[13:57:08] [Server thread/INFO]: [0;31;22mColored Signs are now disabled![m
+[13:57:08] [Server thread/INFO]: [ImageMaps] Disabling ImageMaps v1.0.6
+[13:57:08] [Server thread/INFO]: [WorldEdit] Disabling WorldEdit v7.2.4+5723-e3bfc64
+[13:57:08] [Server thread/INFO]: Unregistering com.sk89q.worldedit.bukkit.BukkitServerInterface from WorldEdit
+[13:57:08] [Server thread/INFO]: [Citizens] Disabling Citizens v2.0.27-SNAPSHOT (build 2286)
+[13:57:08] [Server thread/INFO]: Reloading ResourceManager: Default, bukkit
+[13:57:08] [Server thread/INFO]: Loaded 7 recipes
+[13:57:09] [Server thread/INFO]: Reloading ResourceManager: Default, bukkit
+[13:57:09] [Server thread/INFO]: Loaded 7 recipes
+[13:57:10] [Server thread/WARN]: Legacy plugin ColoredSigns v4.2.0 does not specify an api-version.
+[13:57:10] [Server thread/WARN]: Legacy plugin ColoredAnvils v1.08 does not specify an api-version.
+[13:57:10] [Server thread/INFO]: [Citizens] Loading Citizens v2.0.27-SNAPSHOT (build 2286)
+[13:57:10] [Server thread/INFO]: [ImageMaps] Loading ImageMaps v1.0.6
+[13:57:10] [Server thread/INFO]: [FastAsyncWorldEdit] Loading FastAsyncWorldEdit v1.16-659;8b69d8a
+[13:57:11] [Server thread/INFO]: Got request to register class com.sk89q.worldedit.bukkit.BukkitServerInterface with WorldEdit [com.sk89q.worldedit.extension.platform.PlatformManager@1f1abec2]
+[13:57:11] [Server thread/INFO]: [Colored Signs] Loading ColoredSigns v4.2.0
+[13:57:11] [Server thread/INFO]: [HeadDatabase] Loading HeadDatabase v4.13.5
+[13:57:11] [Server thread/INFO]: [Quests] Loading Quests v4.0.2-b237
+[13:57:11] [Server thread/INFO]: [VoidGenerator] Loading VoidGenerator v1.7.0
+[13:57:11] [Server thread/INFO]: [ColoredAnvils] Loading ColoredAnvils v1.08
+[13:57:11] [Server thread/INFO]: [Multiverse-Core] Loading Multiverse-Core v4.2.2-b812
+[13:57:11] [Server thread/INFO]: [Multiverse-Portals] Loading Multiverse-Portals v4.2.1-b834
+[13:57:11] [Server thread/INFO]: [FastAsyncWorldEdit] Enabling FastAsyncWorldEdit v1.16-659;8b69d8a
+[13:57:11] [Server thread/INFO]: WEPIF: Using the Bukkit Permissions API.
+[13:57:11] [Server thread/WARN]: Server reload detected. This may cause various issues with FastAsyncWorldEdit and dependent plugins.
+[13:57:11] [Server thread/WARN]: For more information, see https://matthewmiller.dev/blog/problem-with-reload/
+[13:57:11] [Server thread/INFO]: Using com.sk89q.worldedit.bukkit.adapter.impl.FAWE_Spigot_v1_16_R3 as the Bukkit adapter
+[13:57:11] [Server thread/INFO]: Registering commands with com.sk89q.worldedit.bukkit.BukkitServerInterface
+[13:57:11] [Server thread/INFO]: [VoidGenerator] Enabling VoidGenerator v1.7.0
+[13:57:11] [Server thread/INFO]: [VoidGenerator] v1_15
+[13:57:11] [Server thread/INFO]: [Citizens] Enabling Citizens v2.0.27-SNAPSHOT (build 2286)
+[13:57:11] [Server thread/INFO]: [Citizens] Vault not found -> no economy handling.
+[13:57:11] [Server thread/INFO]: [ImageMaps] Enabling ImageMaps v1.0.6
+[13:57:12] [Server thread/INFO]: [Colored Signs] Enabling ColoredSigns v4.2.0
+[13:57:12] [Server thread/INFO]: [HeadDatabase] Enabling HeadDatabase v4.13.5
+[13:57:12] [Server thread/INFO]: [HeadDatabase] §bUsing default §3"en_US.lang" §bcreated by §6Arcaniax
+[13:57:12] [Server thread/WARN]: [HeadDatabase] Economy was not loaded, some features will be disabled!
+[13:57:12] [Server thread/INFO]: [Quests] Enabling Quests v4.0.2-b237
+[13:57:12] [Server thread/INFO]: [Quests] Loaded language en-US. Translations via Crowdin
+[13:57:12] [Server thread/INFO]: [Quests] Successfully linked Quests with Citizens 2.0.27-SNAPSHOT (build 2286)
+[13:57:12] [Server thread/INFO]: [Quests] Loading storage implementation: YAML
+[13:57:12] [Server thread/INFO]: [ColoredAnvils] Enabling ColoredAnvils v1.08
+[13:57:12] [Server thread/INFO]: [ColoredAnvils] ColoredAnvils v1.08 has been enabled!
+[13:57:12] [Server thread/INFO]: [ColoredAnvils] Permissions for ColoredAnvils are disabled.
+[13:57:12] [Server thread/INFO]: [Multiverse-Core] Enabling Multiverse-Core v4.2.2-b812
+[13:57:12] [Server thread/WARN]: [Multiverse-Core] "Multiverse-Core v4.2.2-b812" has registered a listener for org.bukkit.event.entity.EntityCreatePortalEvent on method "public void com.onarandombox.MultiverseCore.listeners.MVPortalListener.entityPortalCreate(org.bukkit.event.entity.EntityCreatePortalEvent)", but the event is Deprecated. "Server performance will be affected"; please notify the authors [dumptruckman, Rigby, fernferret, lithium3141, main--].
+[13:57:12] [Server thread/INFO]: [Multiverse-Core] §aWe are aware of the warning about the deprecated event. There is no alternative that allows us to do what we need to do and performance impact is negligible. It is safe to ignore.
+[13:57:12] [Server thread/INFO]: [Multiverse-Core] 3 - World(s) loaded.
+[13:57:12] [Server thread/WARN]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[13:57:12] [Server thread/INFO]: [Multiverse-Core] Version 4.2.2-b812 (API v24) Enabled - By dumptruckman, Rigby, fernferret, lithium3141 and main--
+[13:57:12] [Server thread/INFO]: [Multiverse-Portals] Enabling Multiverse-Portals v4.2.1-b834
+[13:57:12] [Server thread/INFO]: [Multiverse-Portals] 0 - Portals(s) loaded
+[13:57:12] [Server thread/INFO]: [Multiverse-Portals] Found FastAsyncWorldEdit. Using it for selections.
+[13:57:12] [Server thread/INFO]: [Multiverse-Portals 4.2.1-b834]  Enabled - By Rigby and fernferret
+[13:57:13] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[13:57:13] [Server thread/INFO]: Hephaisto_: [0;32;1mReload complete.[m
+[13:57:13] [Server thread/INFO]: [Citizens] Loaded 0 NPCs.
+[13:57:13] [Server thread/INFO]: [Quests] Loaded 4 Quest(s), 8 Action(s), 1 Condition(s) and 807 Phrase(s)
+[13:57:13] [Server thread/INFO]: Gamerule sendCommandFeedback is now set to: false
+[13:57:13] [Craft Scheduler Thread - 16/INFO]: [HeadDatabase] Succesfully loaded 36128 heads!
+[13:57:14] [Craft Scheduler Thread - 16/INFO]: [HeadDatabase] Successfully loaded 18 featured tags!
+[13:57:17] [Server thread/INFO]: Hephaisto_ issued server command: /gamemode creative
+[13:57:17] [Server thread/INFO]: [Hephaisto_: Set own game mode to Creative Mode]
+[13:57:30] [Server thread/INFO]: Hephaisto_ issued server command: //pos1
+[13:57:36] [Server thread/INFO]: Hephaisto_ issued server command: //pos2
+[13:57:40] [Server thread/INFO]: Hephaisto_ issued server command: //set dirt
+[13:57:47] [Server thread/INFO]: Hephaisto_ issued server command: //undo
+[13:57:48] [Server thread/INFO]: Hephaisto_ lost connection: Disconnected
+[13:57:48] [Server thread/INFO]: Hephaisto_ left the game
+[13:58:13] [User Authenticator #15/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[13:58:13] [Server thread/INFO]: LaCeinture[/176.180.3.172:47379] logged in with entity id 1809 at ([END_the_end]397.42333644595976, 158.0, 27.427185130270193)
+[13:58:18] [Server thread/INFO]: LaCeinture issued server command: /plugins
+[13:58:23] [Server thread/INFO]: LaCeinture issued server command: //repl
+[13:58:44] [Server thread/INFO]: LaCeinture issued server command: /gamemode 1
+[13:58:47] [Server thread/INFO]: LaCeinture issued server command: /gamemode creative
+[13:58:47] [Server thread/INFO]: [LaCeinture: Set own game mode to Creative Mode]
+[13:59:46] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:46] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:47] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:47] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:52] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:52] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:52] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:52] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[13:59:59] [Server thread/ERROR]: Tag not valid: {display:{Name:'{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"TOURNE LA PAGE"}],"text":""}'}}
+[14:00:17] [Server thread/INFO]: LaCeinture lost connection: Disconnected
+[14:00:17] [Server thread/INFO]: LaCeinture left the game
+[14:04:14] [User Authenticator #16/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[14:04:14] [Server thread/INFO]: Maximouz[/176.151.246.18:55299] logged in with entity id 1827 at ([END]-38.25446300511543, 85.0, -64.80920584982186)
+[14:04:16] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[14:04:16] [Server thread/INFO]: Maximouz left the game
+[14:04:24] [User Authenticator #17/INFO]: UUID of player Maximouz is b2a6296e-4ff6-4d9d-8d1c-ff5543869d14
+[14:04:24] [Server thread/INFO]: Maximouz[/176.151.246.18:58841] logged in with entity id 1904 at ([END]-38.25446300511543, 85.0, -64.80920584982186)
+[14:04:32] [Server thread/INFO]: Maximouz lost connection: Disconnected
+[14:04:32] [Server thread/INFO]: Maximouz left the game
+[14:08:23] [User Authenticator #18/INFO]: UUID of player THE_BATTEUR is 812a7535-9793-44f1-8b1d-b7f2be539207
+[14:08:23] [Server thread/INFO]: THE_BATTEUR[/88.123.20.141:40465] logged in with entity id 1910 at ([END]6.274395338251594, 100.0, 43.10644318616365)
+[14:08:29] [Server thread/INFO]: THE_BATTEUR lost connection: Disconnected
+[14:08:29] [Server thread/INFO]: THE_BATTEUR left the game
+[14:10:28] [User Authenticator #19/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[14:10:28] [Server thread/INFO]: LaCeinture[/176.180.3.172:39789] logged in with entity id 1949 at ([END_the_end]386.3740682712239, 158.0, 32.31778792580786)
+[14:10:38] [Server thread/INFO]: LaCeinture issued server command: /gamemode creative
+[14:10:38] [Server thread/INFO]: [LaCeinture: Set own game mode to Creative Mode]
+[14:22:32] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko1 true true 2x1
+[14:22:42] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko3 true true 1x2
+[14:22:46] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko3 true true 1x2
+[14:22:52] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko3 true true 1x2
+[14:23:04] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko3 true true 1x2
+[14:23:09] [Server thread/INFO]: LaCeinture issued server command: /imagemap place yoko2 true true 1x2
+[14:32:37] [User Authenticator #20/INFO]: UUID of player Hephaisto_ is 8fd46598-2558-48ed-96ca-ca48f65c988c
+[14:32:37] [Server thread/INFO]: Hephaisto_[/109.24.165.189:39973] logged in with entity id 1980 at ([END_the_end]288.28006668525484, 167.2431358909368, 22.609882521683417)
+[14:32:47] [Server thread/INFO]: Hephaisto_ fell out of the world
+[14:32:48] [Server thread/INFO]: Scanning for legacy world dragon fight...
+[14:32:48] [Server thread/INFO]: Found that the dragon has not yet been killed in this world.
+[14:33:37] [Server thread/INFO]: LaCeinture issued server command: //set blackstone
+[14:34:09] [Server thread/INFO]: LaCeinture issued server command: //repl 1
+[14:34:32] [Server thread/INFO]: LaCeinture issued server command: //set polished_blackstone
+[14:35:19] [Server thread/INFO]: LaCeinture issued server command: //set polished_blackstone
+[14:35:24] [Server thread/INFO]: LaCeinture issued server command: //set polished_blackstone
+[14:35:59] [Server thread/INFO]: LaCeinture lost connection: Disconnected
+[14:35:59] [Server thread/INFO]: LaCeinture left the game
+[14:35:59] [Server thread/INFO]: Hephaisto_ lost connection: Disconnected
+[14:35:59] [Server thread/INFO]: Hephaisto_ left the game
+[14:36:24] [User Authenticator #21/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[14:36:24] [Server thread/INFO]: LaCeinture[/176.180.3.172:54829] logged in with entity id 1997 at ([END_the_end]370.3571787003923, 159.0, 33.23002688030137)
+[14:37:01] [Server thread/INFO]: LaCeinture issued server command: /gamemode creative
+[14:37:01] [Server thread/INFO]: [LaCeinture: Set own game mode to Creative Mode]
+[14:37:21] [Server thread/INFO]: LaCeinture lost connection: Disconnected
+[14:37:21] [Server thread/INFO]: LaCeinture left the game
+[14:38:00] [User Authenticator #22/INFO]: UUID of player Hephaisto_ is 8fd46598-2558-48ed-96ca-ca48f65c988c
+[14:38:00] [Server thread/INFO]: Hephaisto_[/109.24.165.189:33217] logged in with entity id 1998 at ([END_the_end]175.99393879905136, 155.0, -38.440654669108746)
+[14:38:19] [Server thread/INFO]: Hephaisto_ lost connection: Disconnected
+[14:38:19] [Server thread/INFO]: Hephaisto_ left the game
+[14:38:23] [User Authenticator #23/INFO]: UUID of player Hephaisto_ is 8fd46598-2558-48ed-96ca-ca48f65c988c
+[14:38:23] [Server thread/INFO]: Hephaisto_[/109.24.165.189:40145] logged in with entity id 1999 at ([END_the_end]175.99393879905136, 155.0, -38.440654669108746)
+[14:38:23] [User Authenticator #24/INFO]: UUID of player LaCeinture is f4087f36-2526-4eaa-9faa-480c2388b2d5
+[14:38:23] [Server thread/INFO]: LaCeinture[/176.180.3.172:38691] logged in with entity id 2000 at ([END_the_end]368.8056412741608, 158.0625, 30.466969792882377)
+[14:38:29] [Server thread/INFO]: LaCeinture issued server command: /gamemode creative
+[14:38:29] [Server thread/INFO]: [LaCeinture: Set own game mode to Creative Mode]
+[14:38:37] [Server thread/INFO]: Hephaisto_ lost connection: Disconnected
+[14:38:37] [Server thread/INFO]: Hephaisto_ left the game
+[14:41:56] [User Authenticator #25/INFO]: UUID of player LoveIsWeakness is 7350da14-7b8a-425c-b26c-8d3b09760528
+[14:41:56] [Server thread/INFO]: LoveIsWeakness[/81.247.51.159:43997] logged in with entity id 2001 at ([END]-5.5, 79.0, -77.5)
+[14:42:05] [Server thread/INFO]: LoveIsWeakness lost connection: Disconnected
+[14:42:05] [Server thread/INFO]: LoveIsWeakness left the game
+[14:42:58] [User Authenticator #26/INFO]: UUID of player LePeignoire is 38d03c3f-151f-4eb2-8f83-14ac683dbcb2
+[14:42:58] [Server thread/INFO]: LePeignoire[/81.247.51.159:55817] logged in with entity id 2022 at ([END_the_end]330.2734412141922, 212.8345120858281, -3.294753403717199)
+[14:43:05] [Server thread/INFO]: LePeignoire issued server command: /gamemode creative
+[14:43:05] [Server thread/INFO]: [LePeignoire: Set own game mode to Creative Mode]
+[14:43:15] [Server thread/INFO]: LePeignoire issued server command: /tp LaCeinture
+[14:43:15] [Server thread/INFO]: [LePeignoire: Teleported LePeignoire to LaCeinture]
+[14:43:15] [Server thread/WARN]: LePeignoire moved too quickly! 52.8922143986822,-8.589439983611754,75.39029138427395
+[14:43:48] [Server thread/INFO]: LePeignoire issued server command: //repl
+[14:43:55] [Server thread/INFO]: LePeignoire issued server command: //repl red_glass
+[14:44:11] [Server thread/INFO]: LaCeinture issued server command: //set red_wool
+[14:44:34] [Server thread/INFO]: LaCeinture issued server command: //set brain_coral
+[14:44:41] [Server thread/INFO]: LePeignoire issued server command: //repl white_stained_glass_pane
+[14:44:47] [Server thread/INFO]: LePeignoire issued server command: //repl red_stained_glass_pane
+[14:45:00] [Server thread/INFO]: LaCeinture issued server command: //set brain_coral[water_logged=false]
+[14:47:03] [Server thread/INFO]: LePeignoire issued server command: /kill @e[type=minecraft:ender_dragon]
+[14:47:04] [Server thread/INFO]: [LePeignoire: Killed 9 entities]
+[14:47:15] [Server thread/INFO]: LaCeinture issued server command: //set brain_coral[waterlogged=false]
+[14:47:38] [Server thread/INFO]: LaCeinture issued server command: //pos1
+[14:47:44] [Server thread/INFO]: LaCeinture issued server command: //pos2
+[14:47:50] [Server thread/INFO]: LePeignoire issued server command: /give @p minecraft:player_head{SkullOwner:LePeignoire}
+[14:47:50] [Server thread/INFO]: [LePeignoire: Gave 1 [LePeignoire's Head] to LePeignoire]
+[14:47:53] [Server thread/INFO]: LePeignoire issued server command: /give @p minecraft:player_head{SkullOwner:LaCeinture}
+[14:47:53] [Server thread/INFO]: [LePeignoire: Gave 1 [LaCeinture's Head] to LePeignoire]
+[14:48:01] [Server thread/INFO]: LaCeinture issued server command: //replace dead_brain_coral brain_coral[waterlogged=false]
+[14:48:22] [Server thread/INFO]: LaCeinture issued server command: //replace dead_bubble_coral bubble_coral[waterlogged=false]
+[14:48:27] [Server thread/INFO]: LePeignoire issued server command: /tp LaCeinture
+[14:48:27] [Server thread/INFO]: [LePeignoire: Teleported LePeignoire to LaCeinture]
+[14:48:27] [Server thread/INFO]: LaCeinture issued server command: //repl 1
+[14:48:27] [Server thread/WARN]: LePeignoire moved too quickly! 258.342617744363,8.932053493589507,62.08361734883375
+[14:49:02] [pool-14-thread-5/WARN]: java.io.IOException: No space left on device
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.io.FileOutputStream.write(Native Method)
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:318)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.util.MainUtil.getCompressedOS(MainUtil.java:329)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.util.MainUtil.getCompressedOS(MainUtil.java:250)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.object.changeset.FaweStreamChangeSet.getCompressedOS(FaweStreamChangeSet.java:234)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.object.changeset.DiskStorageHistory.getTileRemoveOS(DiskStorageHistory.java:344)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.object.changeset.FaweStreamChangeSet.addTileRemove(FaweStreamChangeSet.java:365)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.object.changeset.AbstractChangeSet.processSet(AbstractChangeSet.java:135)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.processors.MultiBatchProcessor.processSet(MultiBatchProcessor.java:113)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.processors.MultiBatchProcessor.processSet(MultiBatchProcessor.java:93)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.processors.BatchProcessorHolder.processSet(BatchProcessorHolder.java:26)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.processors.BatchProcessorHolder.processSet(BatchProcessorHolder.java:26)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.chunk.ChunkHolder.call(ChunkHolder.java:936)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.chunk.ChunkHolder.call(ChunkHolder.java:920)
+[14:49:02] [pool-14-thread-5/WARN]: 	at com.boydti.fawe.beta.implementation.chunk.ChunkHolder.call(ChunkHolder.java:33)
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.lang.Thread.run(Thread.java:834)
+[14:49:02] [pool-14-thread-5/WARN]: java.io.IOException: No space left on device
+[14:49:02] [pool-14-thread-5/WARN]: 	at java.base/java.io.FileOutputStream.write(Native Method)
+[14:49:02] [pool-14-

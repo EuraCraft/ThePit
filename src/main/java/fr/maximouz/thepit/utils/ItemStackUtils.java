@@ -127,6 +127,11 @@ public class ItemStackUtils {
 
     public static boolean equip(Player player, ItemStack item, boolean playSounds) {
 
+        System.out.print("equiping " + player.getName());
+
+        if (item == null || item.getType() == Material.AIR)
+            return false;
+
         if (isHelmet(item)) {
 
             if (hasHelmet(player)) {
@@ -136,7 +141,7 @@ public class ItemStackUtils {
                     return false;
 
                 // Si l'équipement ramassé est moins bien que celui équipé
-                if (item.getType().getId() < player.getInventory().getHelmet().getType().getId()) {
+                if (item.getType().getId() <= player.getInventory().getHelmet().getType().getId()) {
 
                     player.getInventory().setItem(index, item);
                     item = player.getInventory().getHelmet();
@@ -168,7 +173,7 @@ public class ItemStackUtils {
                     return false;
 
                 // Si l'équipement ramassé est moins bien que celui équipé
-                if (item.getType().getId() < player.getInventory().getChestplate().getType().getId()) {
+                if (item.getType().getId() <= player.getInventory().getChestplate().getType().getId()) {
 
                     player.getInventory().setItem(index, item);
                     item = player.getInventory().getChestplate();
@@ -200,7 +205,7 @@ public class ItemStackUtils {
                     return false;
 
                 // Si l'équipement ramassé est moins bien que celui équipé
-                if (item.getType().getId() < player.getInventory().getLeggings().getType().getId()) {
+                if (item.getType().getId() <= player.getInventory().getLeggings().getType().getId()) {
 
                     player.getInventory().setItem(index, item);
                     item = player.getInventory().getLeggings();
@@ -232,7 +237,7 @@ public class ItemStackUtils {
                     return false;
 
                 // Si l'équipement ramassé est moins bien que celui équipé
-                if (item.getType().getId() < player.getInventory().getBoots().getType().getId()) {
+                if (item.getType().getId() <= player.getInventory().getBoots().getType().getId()) {
 
                     player.getInventory().setItem(index, item);
                     item = player.getInventory().getBoots();
@@ -263,6 +268,16 @@ public class ItemStackUtils {
 
     public static boolean isSword(ItemStack item) {
         return isSword(item.getType());
+    }
+
+    public static int count(ItemStack[] contents, Material material) {
+        int count = 0;
+
+        for (ItemStack item : contents)
+            if (item != null && item.getType() == material)
+                count++;
+
+        return count;
     }
 
 }

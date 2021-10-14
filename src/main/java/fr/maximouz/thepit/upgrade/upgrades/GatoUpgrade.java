@@ -3,14 +3,11 @@ package fr.maximouz.thepit.upgrade.upgrades;
 import fr.euracraft.api.item.ItemBuilder;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.Level;
-import fr.maximouz.thepit.events.EarnGoldEvent;
-import fr.maximouz.thepit.events.EarnReason;
-import fr.maximouz.thepit.events.EarnXpEvent;
+import fr.maximouz.thepit.events.PlayerKillEvent;
 import fr.maximouz.thepit.statistic.PlayerStatistic;
 import fr.maximouz.thepit.statistic.PlayerStatisticsManager;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
-import fr.maximouz.thepit.utils.Format;
 import fr.maximouz.thepit.utils.IntegerToRoman;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,14 +18,15 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class GatoUpgrade extends Upgrade {
 
     private final Map<Integer, Integer> tiersXKills;
 
-    public GatoUpgrade() {
-        super(UpgradeType.GATO, "gato", "Gourmet", "%KILLS% " + ChatColor.GRAY + "après votre mort", ChatColor.GRAY + "rapportent " + ChatColor.GOLD + "+5g" + ChatColor.GRAY + " et " + ChatColor.AQUA + "+5 XP" + ChatColor.GRAY + "." );
+    public GatoUpgrade(UpgradeType type) {
+        super(type);
         this.tiersXKills = new HashMap<>();
 
         this.tiersXKills.put(1, 1);
@@ -51,9 +49,9 @@ public class GatoUpgrade extends Upgrade {
         setPrice(5, 5000.0);
         setLevelRequired(5, Level.ONE);
 
-        this.tiersXKills.put(6, 6);
+        /*this.tiersXKills.put(6, 6);
         setPrice(6, 7500.0);
-        setLevelRequired(6, Level.SEVENTY);
+        setLevelRequired(6, Level.SEVENTY);*/
     }
 
     @Override
@@ -82,48 +80,52 @@ public class GatoUpgrade extends Upgrade {
     public ItemStack getItemStack(Player player, Bank bank) {
 
         int playerTier = getTier(player);
-        double tierPrice = getPrice(playerTier == getMaxTier() ? playerTier : playerTier + 1);
-        int tierXKills = tiersXKills.get(playerTier == getMaxTier() ? playerTier : playerTier + 1);
-        boolean canBuy = bank.getBalance() >= tierPrice;
+        int tier = Math.min(playerTier + 1, getMaxTier());
+        BigDecimal tierPrice = getPrice(tier);
+        int tierXKills = tiersXKills.get(tier);
+        boolean canBuy = bank.getBalance().compareTo(tierPrice) >= 0;
 
         ItemStack item = new ItemBuilder(Material.CAKE).build();
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName((canBuy ? ChatColor.RED : ChatColor.GREEN) + getDisplayName());
+        meta.setDisplayName((canBuy ? ChatColor.GREEN : ChatColor.RED) + getDisplayName());
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY + "Bonus: " + getBonus(player));
-        lore.add(ChatColor.GRAY + "Palier: " + ChatColor.GREEN + IntegerToRoman.toRoman(playerTier == getMaxTier() ? playerTier : playerTier + 1));
+        lore.add("§7Bonus: " + getBonus(player));
+        lore.add("§7Palier: " + ChatColor.GREEN + IntegerToRoman.toRoman(tier));
         lore.add("");
-        lore.add(ChatColor.GRAY + "Prochain palier:");
+        lore.add("§7Prochain palier:");
 
         List<String> eachTierDescription = new ArrayList<>();
         for (String line : getEachTierDescription())
             eachTierDescription.add(line
-                    .replace("%KILLS%" , tierXKills > 1 ? ChatColor.GRAY + "Les " + ChatColor.LIGHT_PURPLE + "" + tierXKills + " premiers meurtres" : ChatColor.GRAY + "Le " + ChatColor.LIGHT_PURPLE + "premier meurtre")
+                    .replace("%KILLS%" , tierXKills > 1 ? "§7Les §d" + tierXKills + " premiers meurtres" : "§7Le §dpremier meurtre")
                     .replace("rapportent", tierXKills <= 1 ? "rapporte" : "rapportent")
             );
 
         lore.addAll(eachTierDescription);
         lore.add("");
 
+        Level levelRequired = getLevelRequired(tier);
+
         if (playerTier == getMaxTier()) {
 
-            lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Amélioration au dernier palier !");
             meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            lore.add("§aPalier max débloqué !");
 
-        } else if (bank.getLevel().level < getLevelRequired(playerTier + 1).level) {
+        } else if (bank.getLevel().level < levelRequired.level) {
 
-            lore.add(ChatColor.GRAY + "Niveau requis: " + bank.getPrestige().getColor() + "[" + Level.getLevel(bank.getLevel().level + 1).getLevel() + bank.getPrestige().getColor() + "]");
+            lore.add("§7Niveau requis: " + bank.getPrestige().getColor() + "[" + levelRequired.getLevel() + bank.getPrestige().getColor() + "]");
             lore.add(ChatColor.RED + "Votre niveau est trop bas !");
 
         } else {
 
-            lore.add(ChatColor.GRAY + "Prix: " + ChatColor.GOLD + Format.format(tierPrice) + "g");
-            lore.add(bank.getBalance() >= tierPrice ? ChatColor.YELLOW + "Clic gauche pour acheter !" : ChatColor.RED + "Vous n'avez pas assez de Gold !");
+            lore.add("§7Prix: " + ChatColor.GOLD + tierPrice.toString() + "g");
+            lore.add(canBuy ? "§7Clic gauche pour acheter !" : "§cVous n'avez pas assez de Gold !");
 
         }
+
         meta.setLore(lore);
         item.setItemMeta(meta);
 
@@ -140,12 +142,13 @@ public class GatoUpgrade extends Upgrade {
     }
 
     @EventHandler
-    public void onEarnXp(EarnXpEvent event) {
-
-        if (event.getReason() != EarnReason.KILL)
-            return;
+    public void onKill(PlayerKillEvent event) {
 
         Player player = event.getPlayer();
+
+        if (player == null)
+            return;
+
         int playerTier = getTier(player);
 
         if (playerTier > 0) {
@@ -155,31 +158,8 @@ public class GatoUpgrade extends Upgrade {
 
             if (killStreak <= getTierFirstKills(playerTier)) {
 
-                event.setAmount(event.getAmount() + 5.0);
-
-            }
-
-        }
-
-    }
-
-    @EventHandler
-    public void onEarnGold(EarnGoldEvent event) {
-
-        if (event.getReason() != EarnReason.KILL)
-            return;
-
-        Player player = event.getPlayer();
-        int playerTier = getTier(player);
-
-        if (playerTier > 0) {
-
-            PlayerStatistic playerStatistic = PlayerStatisticsManager.getInstance().getPlayerStatistic(player);
-            long killStreak = playerStatistic.getKillStreak();
-
-            if (killStreak <= getTierFirstKills(playerTier)) {
-
-                event.setAmount(event.getAmount() + 5.0);
+                event.setGoldReward(event.getGoldReward().add(BigDecimal.valueOf(5)));
+                event.setExperienceReward(event.getExperienceReward().add(BigDecimal.valueOf(5)));
 
             }
 

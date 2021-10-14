@@ -1,0 +1,37 @@
+# See https://github.com/PikaMug/Quests/wiki/2-%E2%80%90-Configuration
+accept-timeout: 20
+allow-command-questing: true
+allow-command-quests-with-npcs: false
+allow-pranks: true
+allow-quitting: true
+ask-confirmation: true
+console-logging: 2
+disable-command-feedback: true
+generate-files-on-join: true
+ignore-locked-quests: false
+kill-delay: 600
+language: en-US
+max-quests: 0
+show-requirements: true
+show-titles: true
+strict-player-movement: 0
+storage-data:
+  address: localhost:3306
+  database: minecraft
+  username: root
+  password: ''
+  table_prefix: quests_
+  pool-settings:
+    max-pool-size: 10
+    min-idle: 10
+    max-lifetime: 1800000
+    connection-timeout: 5000
+storage-method:
+  player-data: yaml
+top-limit: 150
+translate-names: true
+translate-subcommands: false
+npc-effects:
+  enabled: true
+  new-quest: note
+  redo-quest: heart

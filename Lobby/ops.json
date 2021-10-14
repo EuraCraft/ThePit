@@ -1,0 +1,32 @@
+[
+  {
+    "uuid": "812a7535-9793-44f1-8b1d-b7f2be539207",
+    "name": "THE_BATTEUR",
+    "level": 4,
+    "bypassesPlayerLimit": true
+  },
+  {
+    "uuid": "8fd46598-2558-48ed-96ca-ca48f65c988c",
+    "name": "Hephaisto_",
+    "level": 4,
+    "bypassesPlayerLimit": true
+  },
+  {
+    "uuid": "f4087f36-2526-4eaa-9faa-480c2388b2d5",
+    "name": "LaCeinture",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "38d03c3f-151f-4eb2-8f83-14ac683dbcb2",
+    "name": "LePeignoire",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "b2a6296e-4ff6-4d9d-8d1c-ff5543869d14",
+    "name": "Maximouz",
+    "level": 4,
+    "bypassesPlayerLimit": true
+  }
+]

@@ -8,32 +8,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class WorldUtils {
 
     /**
-     * Obtenir une Location à partir d'une chaîne de caractère en config
-     * @param config The configuration file where is located the string location
-     * @param path The path to the string location
+     * Obtenir une Location à partir d'une chaîne de caractère
+     * @param location location in String
      * @return Location or null if the string location is corrupted
      */
-    public static Location loadLocation(FileConfiguration config, String path) {
-        String worldName = config.getString(path + ".world");
+    public static Location fromString(String location) {
+        String[] args = location.split(Pattern.quote(","));
+        String worldName = args[0];
         World world = Bukkit.getWorld(worldName);
 
         if (world != null) {
             try {
-                double x = config.getDouble(path + ".x");
-                double y = config.getDouble(path + ".y");
-                double z = config.getDouble(path + ".z");
-                float yaw = 0f;
-                float pitch = 0f;
-
-                if (config.contains(path + ".yaw"))
-                    yaw = Float.parseFloat(config.getString(path + ".yaw"));
-
-                if (config.contains(path + ".pitch"))
-                    pitch = Float.parseFloat(config.getString(path + ".pitch"));
+                double x = Double.parseDouble(args[1]);
+                double y = Double.parseDouble(args[2]);
+                double z = Double.parseDouble(args[3]);
+                float yaw = Float.parseFloat(args[4]);
+                float pitch = Float.parseFloat(args[5]);
 
                 return new Location(world, x, y, z, yaw, pitch);
             } catch (Exception ex) {
@@ -41,50 +36,15 @@ public class WorldUtils {
             }
         }
 
-        return null;
-    }
-
-    /**
-     * Obtenir une Location à partir d'une chaîne de caractère en config avec un World choisi au préalable
-     * @param config The configuration file where is located the string location
-     * @param path The path to the string location
-     * @param world The world of the location
-     * @return Location or null if the string location is corrupted
-     */
-    public static Location loadLocation(FileConfiguration config, String path, World world) {
-        try {
-            double x = config.getDouble(path + ".x");
-            double y = config.getDouble(path + ".y");
-            double z = config.getDouble(path + ".z");
-            float yaw = 0f;
-            float pitch = 0f;
-
-            if (config.contains(path + ".yaw"))
-                yaw = Float.parseFloat(config.getString(path + ".yaw"));
-
-            if (config.contains(path + ".pitch"))
-                pitch = Float.parseFloat(config.getString(path + ".pitch"));
-
-            return new Location(world, x, y, z, yaw, pitch);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
+        return new Location(Bukkit.getWorld("world"), 0,0,0);
     }
 
     /**
      * Sauvegarder en une chaîne de caractères dans une config une Location
-     * @param config The configuration file we want to save as string the Location
-     * @param path The path where we want the string Location goes
+     * @param location The location we want to turn into String
      */
-    public static void saveLocation(FileConfiguration config, String path, Location location) {
-        config.set(path + ".world", location.getWorld().getName());
-        config.set(path + ".x", location.getX());
-        config.set(path + ".y", location.getY());
-        config.set(path + ".z", location.getZ());
-        config.set(path + ".yaw", location.getYaw());
-        config.set(path + ".pitch", location.getPitch());
+    public static String toString(Location location) {
+        return location.getWorld().getName() + "," + location.getX() + ","  + location.getY() + "," + location.getZ() + "," + location.getYaw() + "," + location.getPitch();
     }
 
     public static Vector getBackDirection(Location location) {

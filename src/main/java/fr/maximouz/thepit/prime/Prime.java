@@ -8,9 +8,9 @@ import java.math.RoundingMode;
 public class Prime {
 
     private final Player player;
-    private double gold;
+    private BigDecimal gold;
 
-    public Prime(Player player, double defaultGold) {
+    public Prime(Player player, BigDecimal defaultGold) {
         this.player = player;
         this.gold = defaultGold;
     }
@@ -19,15 +19,15 @@ public class Prime {
         return player;
     }
 
-    public double getGold() {
+    public BigDecimal getGold() {
         return gold;
     }
 
-    public void setGold(double gold) {
-        this.gold = BigDecimal.valueOf(gold).setScale(1, RoundingMode.HALF_UP).doubleValue();
+    public void setGold(BigDecimal gold) {
+        this.gold = gold;
     }
 
-    public void bumpGold(double amount) {
-        this.gold += BigDecimal.valueOf(amount).setScale(1, RoundingMode.HALF_UP).doubleValue();
+    public void bumpGold(BigDecimal amount) {
+        gold = gold.add(amount);
     }
 }

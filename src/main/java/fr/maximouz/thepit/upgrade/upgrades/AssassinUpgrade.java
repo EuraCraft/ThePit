@@ -22,8 +22,8 @@ public class AssassinUpgrade extends Upgrade {
      */
     private final Map<Integer, Integer> tiersMultiplier;
 
-    public AssassinUpgrade() {
-        super(UpgradeType.ASSASSIN, "assassin", "Assassin", ChatColor.GRAY + "Vous infligez " + ChatColor.RED + "1%" + ChatColor.GRAY + " de dégâts supplémentaires", ChatColor.GRAY + "au corps à corps.");
+    public AssassinUpgrade(UpgradeType type) {
+        super(type);
         tiersMultiplier = new HashMap<>();
 
         tiersMultiplier.put(1, 1);
@@ -46,9 +46,9 @@ public class AssassinUpgrade extends Upgrade {
         setPrice(5, 3000.0);
         setLevelRequired(5, Level.SEVENTY);
 
-        tiersMultiplier.put(6, 6);
+        /*tiersMultiplier.put(6, 6);
         setPrice(6, 4000.0);
-        setLevelRequired(6, Level.SEVENTY);
+        setLevelRequired(6, Level.SEVENTY);*/
 
     }
     
@@ -64,7 +64,8 @@ public class AssassinUpgrade extends Upgrade {
 
     @Override
     public String getBonus(Player player) {
-        return ChatColor.RED + "+1%";
+        int tier = Math.min(getTier(player) + 1, getMaxTier());
+        return ChatColor.RED + "+" + tiersMultiplier.get(tier) + "%";
     }
 
     @Override
@@ -82,7 +83,7 @@ public class AssassinUpgrade extends Upgrade {
         return 1 + (tiersMultiplier.get(tier) / 100.0);
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler (priority = EventPriority.HIGH)
     public void onDamage(EntityDamageByEntityEvent event) {
 
         if (event.isCancelled() || event.getDamager().getType() != EntityType.PLAYER || event.getEntity().getType() != EntityType.PLAYER || event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK)

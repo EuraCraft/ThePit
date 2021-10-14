@@ -1,6 +1,7 @@
 package fr.maximouz.thepit.tasks;
 
 import fr.maximouz.thepit.ThePit;
+import fr.maximouz.thepit.area.AreaManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -32,8 +33,8 @@ public class GoldSpawnTask extends BukkitRunnable {
 
         if (Bukkit.getOnlinePlayers().size() > 0) {
 
-            Location location = ThePit.mapArea.getRandomLocation();
-            location.getWorld().dropItemNaturally(location, new ItemStack(Material.GOLD_INGOT));
+            Location location = AreaManager.getInstance().getMapArea().getCuboid().getRandomLocation();
+            Bukkit.getScheduler().runTask(ThePit.getInstance(), () -> location.getWorld().dropItem(location, new ItemStack(Material.GOLD_INGOT)));
 
         }
 

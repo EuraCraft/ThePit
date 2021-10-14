@@ -6,7 +6,8 @@ public interface IPerk {
 
     void load(Player player);
     void save(Player player);
-    void onSelect(Player player);
-    void onUnselect(Player player);
+
+    void onSelected(Player player);
+    void onUnselected(Player player);
 
 }

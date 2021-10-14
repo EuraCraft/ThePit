@@ -1,0 +1,4 @@
+map: "world,0,0,0=>0,0,0"
+pit:
+  display_name: "&6Principale"
+  cuboid: "world,0,0,0=>0,0,0"

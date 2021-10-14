@@ -1,22 +1,24 @@
 package fr.maximouz.thepit.upgrade.upgrades;
 
 import fr.maximouz.thepit.bank.Level;
-import fr.maximouz.thepit.events.EarnGoldEvent;
-import fr.maximouz.thepit.events.EarnReason;
+import fr.maximouz.thepit.events.PickupGoldEvent;
+import fr.maximouz.thepit.events.PlayerAssistEvent;
+import fr.maximouz.thepit.events.PlayerKillEvent;
 import fr.maximouz.thepit.upgrade.Upgrade;
 import fr.maximouz.thepit.upgrade.UpgradeType;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class GoldBoostUpgrade extends Upgrade {
 
     private final Map<Integer, Integer> tiersMultiplier;
 
-    public GoldBoostUpgrade() {
-        super(UpgradeType.GOLD_BOOST, "goldboost", "Boost Gold", ChatColor.GRAY + "Vous gagnez " + ChatColor.YELLOW + "10% de Gold" + ChatColor.GRAY + " supplémentaires", ChatColor.GRAY + "lorsque vous réalisez un meurtre, une", ChatColor.GRAY + "assistance ou que vous en ramassez au sol.");
+    public GoldBoostUpgrade(UpgradeType type) {
+        super(type);
 
         tiersMultiplier = new HashMap<>();
 
@@ -40,9 +42,9 @@ public class GoldBoostUpgrade extends Upgrade {
         setPrice(5, 40000.0);
         setLevelRequired(5, Level.SEVENTY);
 
-        tiersMultiplier.put(6, 60);
+        /*tiersMultiplier.put(6, 60);
         setPrice(6, 60000.0);
-        setLevelRequired(6, Level.SEVENTY);
+        setLevelRequired(6, Level.SEVENTY);*/
 
     }
 
@@ -79,18 +81,45 @@ public class GoldBoostUpgrade extends Upgrade {
     }
 
     @EventHandler
-    public void onEarnGold(EarnGoldEvent event) {
-
-        if (event.getReason() != EarnReason.KILL && event.getReason() != EarnReason.ASSIST && event.getReason() != EarnReason.PICK_UP)
-            return;
+    public void onPickupGold(PickupGoldEvent event) {
 
         Player player = event.getPlayer();
-        double amount = event.getAmount();
 
         int playerTier = getTier(player);
         if (playerTier > 0) {
 
-            event.setAmount(getMultiplier(playerTier) * amount);
+            event.setGoldReward(event.getGoldReward().multiply(BigDecimal.valueOf(getMultiplier(playerTier))));
+
+        }
+
+    }
+
+    @EventHandler
+    public void onAssist(PlayerAssistEvent event) {
+
+        Player player = event.getPlayer();
+
+        int playerTier = getTier(player);
+        if (playerTier > 0) {
+
+            event.setGoldReward(event.getGoldReward().multiply(BigDecimal.valueOf(getMultiplier(playerTier))));
+
+        }
+
+    }
+
+    @EventHandler
+    public void onKill(PlayerKillEvent event) {
+
+        Player player = event.getPlayer();
+
+        if (player == null)
+            return;
+
+        int playerTier = getTier(player);
+        if (playerTier > 0) {
+
+            event.setGoldReward(event.getGoldReward().multiply(BigDecimal.valueOf(getMultiplier(playerTier))));
 
         }
 

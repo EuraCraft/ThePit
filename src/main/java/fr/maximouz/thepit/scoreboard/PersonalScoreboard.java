@@ -13,6 +13,7 @@ import fr.maximouz.thepit.utils.Format;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 public class PersonalScoreboard {
@@ -45,7 +46,11 @@ public class PersonalScoreboard {
 
         String prestigeColor = bank.getPrestige().getColor();
         euraScoreboard.setLine(nb++, ChatColor.GRAY + "► " + ChatColor.WHITE + "Niveau: " + prestigeColor + "[" + bank.getLevel().getLevel() + prestigeColor + "]");
-        euraScoreboard.setLine(nb++, ChatColor.GRAY + "► " + ChatColor.AQUA + Format.format(bank.getNextLevelExperience() - bank.getExperience()) + " XP" + ChatColor.WHITE + " requises");
+        BigDecimal xp = bank.getNextLevelExperience().subtract(bank.getExperience());
+        if (xp.compareTo(BigDecimal.ZERO) > 0)
+            euraScoreboard.setLine(nb++, ChatColor.GRAY + "► " + ChatColor.AQUA + Format.format(xp) + " XP" + ChatColor.WHITE + " requises");
+        else
+            euraScoreboard.setLine(nb++, ChatColor.GRAY + "► " + ChatColor.AQUA + "XP MAX");
 
         euraScoreboard.setLine(nb++, ChatColor.AQUA + "");
 

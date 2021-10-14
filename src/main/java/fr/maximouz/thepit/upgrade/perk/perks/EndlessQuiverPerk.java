@@ -1,40 +1,32 @@
 package fr.maximouz.thepit.upgrade.perk.perks;
 
 import fr.maximouz.thepit.bank.Level;
+import fr.maximouz.thepit.events.PlayerShootPlayerEvent;
 import fr.maximouz.thepit.upgrade.perk.Perk;
 import fr.maximouz.thepit.upgrade.perk.PerkType;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class EndlessQuiverPerk extends Perk {
 
     public EndlessQuiverPerk() {
-        super(PerkType.ENDLESS_QUIVER, "Carquois infini", Material.ARROW, Level.TEN, 2000.0, ChatColor.GRAY + "Vous gagnez " + ChatColor.WHITE + "3 flêches " + ChatColor.GRAY + "quand vous", ChatColor.GRAY + "tirez à l'arc sur un joueur.");
+        super(PerkType.ENDLESS_QUIVER, "Carquois infini", Material.ARROW, Level.TEN, 2000.0,
+                "§7Vous gagnez §f3 flêches§7 quand vous",
+                "§7tirez à l'arc sur un joueur.");
     }
 
-    @Override
-    public void load(Player player) {}
+    @EventHandler
+    public void onShoot(PlayerShootPlayerEvent event) {
 
-    @Override
-    public void save(Player player) {}
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
-        if (event.getEntity().getType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.ARROW || !(((Arrow) event.getDamager()).getShooter() instanceof Player))
+        if (event.isShootingHimself())
             return;
 
-        Player player = (Player) ((Arrow) event.getDamager()).getShooter();
+        Player player = event.getPlayer();
 
         if (hasSelected(player))
-            player.getInventory().addItem(new ItemStack(Material.ARROW, 3));
+            player.getInventory().addItem(new ItemStack(Material.ARROW, 4));
 
     }
 

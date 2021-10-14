@@ -1,0 +1,926 @@
+storageVersion: 1
+maps:
+  256:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 3
+    y: 3
+    scale: 0.256
+  257:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 3
+    y: 4
+    scale: 0.256
+  258:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 4
+    y: 0
+    scale: 0.256
+  259:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 4
+    y: 1
+    scale: 0.256
+  260:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 4
+    y: 2
+    scale: 0.256
+  261:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 4
+    y: 3
+    scale: 0.256
+  262:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 4
+    y: 4
+    scale: 0.256
+  263:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 5
+    y: 0
+    scale: 0.256
+  264:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 5
+    y: 1
+    scale: 0.256
+  265:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 5
+    y: 2
+    scale: 0.256
+  266:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 5
+    y: 3
+    scale: 0.256
+  267:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 5
+    y: 4
+    scale: 0.256
+  268:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 6
+    y: 0
+    scale: 0.256
+  269:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 6
+    y: 1
+    scale: 0.256
+  270:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 6
+    y: 2
+    scale: 0.256
+  271:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 6
+    y: 3
+    scale: 0.256
+  272:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 6
+    y: 4
+    scale: 0.256
+  273:
+    ==: ImageMaps.Map
+    image: girafe
+    x: 0
+    y: 0
+    scale: 0.256
+  274:
+    ==: ImageMaps.Map
+    image: girafe
+    x: 0
+    y: 1
+    scale: 0.256
+  275:
+    ==: ImageMaps.Map
+    image: girafe
+    x: 0
+    y: 2
+    scale: 0.256
+  276:
+    ==: ImageMaps.Map
+    image: girafe
+    x: 0
+    y: 3
+    scale: 0.256
+  277:
+    ==: ImageMaps.Map
+    image: yoko3
+    x: 0
+    y: 0
+    scale: 0.256
+  278:
+    ==: ImageMaps.Map
+    image: yoko3
+    x: 0
+    y: 1
+    scale: 0.256
+  289:
+    ==: ImageMaps.Map
+    image: metro1
+    x: 0
+    y: 0
+    scale: 0.08533333333333333
+  290:
+    ==: ImageMaps.Map
+    image: metro1
+    x: 0
+    y: 0
+    scale: 0.256
+  291:
+    ==: ImageMaps.Map
+    image: metro1
+    x: 1
+    y: 0
+    scale: 0.256
+  292:
+    ==: ImageMaps.Map
+    image: metro1
+    x: 2
+    y: 0
+    scale: 0.256
+  293:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 0
+    scale: 0.128
+  294:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 1
+    scale: 0.128
+  295:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 0
+    scale: 0.128
+  296:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 1
+    scale: 0.128
+  297:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 0
+    scale: 0.128
+  298:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 1
+    scale: 0.128
+  299:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 0
+    scale: 0.21333333333333335
+  300:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 1
+    scale: 0.21333333333333335
+  301:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 2
+    scale: 0.21333333333333335
+  302:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 0
+    scale: 0.21333333333333335
+  303:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 1
+    scale: 0.21333333333333335
+  304:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 2
+    scale: 0.21333333333333335
+  305:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 0
+    scale: 0.21333333333333335
+  306:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 1
+    scale: 0.21333333333333335
+  307:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 2
+    scale: 0.21333333333333335
+  308:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 0
+    scale: 0.21333333333333335
+  309:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 1
+    scale: 0.21333333333333335
+  310:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 2
+    scale: 0.21333333333333335
+  311:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 0
+    scale: 0.21333333333333335
+  312:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 1
+    scale: 0.21333333333333335
+  313:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 2
+    scale: 0.21333333333333335
+  314:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 0
+    scale: 0.256
+  315:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 1
+    scale: 0.256
+  316:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 0
+    y: 2
+    scale: 0.256
+  317:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 0
+    scale: 0.256
+  318:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 1
+    scale: 0.256
+  319:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 1
+    y: 2
+    scale: 0.256
+  320:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 0
+    scale: 0.256
+  321:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 1
+    scale: 0.256
+  322:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 2
+    y: 2
+    scale: 0.256
+  323:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 0
+    scale: 0.256
+  324:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 1
+    scale: 0.256
+  325:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 3
+    y: 2
+    scale: 0.256
+  326:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 0
+    scale: 0.256
+  327:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 1
+    scale: 0.256
+  328:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 4
+    y: 2
+    scale: 0.256
+  329:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 5
+    y: 0
+    scale: 0.256
+  330:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 5
+    y: 1
+    scale: 0.256
+  331:
+    ==: ImageMaps.Map
+    image: metro2
+    x: 5
+    y: 2
+    scale: 0.256
+  168:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 0
+    y: 0
+    scale: 0.256
+  169:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 0
+    y: 1
+    scale: 0.256
+  170:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 0
+    y: 2
+    scale: 0.256
+  171:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 0
+    y: 3
+    scale: 0.256
+  172:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 1
+    y: 0
+    scale: 0.256
+  173:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 1
+    y: 1
+    scale: 0.256
+  174:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 1
+    y: 2
+    scale: 0.256
+  175:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 1
+    y: 3
+    scale: 0.256
+  176:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 2
+    y: 0
+    scale: 0.256
+  177:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 2
+    y: 1
+    scale: 0.256
+  178:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 2
+    y: 2
+    scale: 0.256
+  179:
+    ==: ImageMaps.Map
+    image: affiche
+    x: 2
+    y: 3
+    scale: 0.256
+  180:
+    ==: ImageMaps.Map
+    image: logo5
+    x: 0
+    y: 0
+    scale: 0.4266666666666667
+  181:
+    ==: ImageMaps.Map
+    image: logo5
+    x: 0
+    y: 1
+    scale: 0.4266666666666667
+  182:
+    ==: ImageMaps.Map
+    image: logo5
+    x: 1
+    y: 0
+    scale: 0.4266666666666667
+  183:
+    ==: ImageMaps.Map
+    image: logo5
+    x: 1
+    y: 1
+    scale: 0.4266666666666667
+  184:
+    ==: ImageMaps.Map
+    image: logo2
+    x: 0
+    y: 0
+    scale: 1.7902097902097902
+  185:
+    ==: ImageMaps.Map
+    image: logo2
+    x: 0
+    y: 1
+    scale: 1.7902097902097902
+  186:
+    ==: ImageMaps.Map
+    image: logo2
+    x: 1
+    y: 0
+    scale: 1.7902097902097902
+  187:
+    ==: ImageMaps.Map
+    image: logo2
+    x: 1
+    y: 1
+    scale: 1.7902097902097902
+  188:
+    ==: ImageMaps.Map
+    image: logo3
+    x: 0
+    y: 0
+    scale: 0.256
+  189:
+    ==: ImageMaps.Map
+    image: logo3
+    x: 0
+    y: 1
+    scale: 0.256
+  190:
+    ==: ImageMaps.Map
+    image: logo3
+    x: 1
+    y: 0
+    scale: 0.256
+  191:
+    ==: ImageMaps.Map
+    image: logo3
+    x: 1
+    y: 1
+    scale: 0.256
+  192:
+    ==: ImageMaps.Map
+    image: logo4
+    x: 0
+    y: 0
+    scale: 0.28444444444444444
+  193:
+    ==: ImageMaps.Map
+    image: logo4
+    x: 0
+    y: 1
+    scale: 0.28444444444444444
+  194:
+    ==: ImageMaps.Map
+    image: logo4
+    x: 1
+    y: 0
+    scale: 0.28444444444444444
+  195:
+    ==: ImageMaps.Map
+    image: logo4
+    x: 1
+    y: 1
+    scale: 0.28444444444444444
+  196:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 0
+    y: 0
+    scale: 0.4266666666666667
+  197:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 0
+    y: 1
+    scale: 0.4266666666666667
+  198:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 0
+    y: 2
+    scale: 0.4266666666666667
+  199:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 1
+    y: 0
+    scale: 0.4266666666666667
+  200:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 1
+    y: 1
+    scale: 0.4266666666666667
+  201:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 1
+    y: 2
+    scale: 0.4266666666666667
+  202:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 2
+    y: 0
+    scale: 0.4266666666666667
+  203:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 2
+    y: 1
+    scale: 0.4266666666666667
+  204:
+    ==: ImageMaps.Map
+    image: logo1
+    x: 2
+    y: 2
+    scale: 0.4266666666666667
+  205:
+    ==: ImageMaps.Map
+    image: gaming1
+    x: 0
+    y: 0
+    scale: 0.28444444444444444
+  206:
+    ==: ImageMaps.Map
+    image: gaming1
+    x: 0
+    y: 1
+    scale: 0.28444444444444444
+  207:
+    ==: ImageMaps.Map
+    image: gaming1
+    x: 1
+    y: 0
+    scale: 0.28444444444444444
+  208:
+    ==: ImageMaps.Map
+    image: gaming1
+    x: 1
+    y: 1
+    scale: 0.28444444444444444
+  209:
+    ==: ImageMaps.Map
+    image: gaming2
+    x: 0
+    y: 0
+    scale: 0.28444444444444444
+  210:
+    ==: ImageMaps.Map
+    image: gaming2
+    x: 0
+    y: 1
+    scale: 0.28444444444444444
+  211:
+    ==: ImageMaps.Map
+    image: gaming2
+    x: 1
+    y: 0
+    scale: 0.28444444444444444
+  212:
+    ==: ImageMaps.Map
+    image: gaming2
+    x: 1
+    y: 1
+    scale: 0.28444444444444444
+  213:
+    ==: ImageMaps.Map
+    image: logo4
+    x: 0
+    y: 0
+    scale: 0.14222222222222222
+  214:
+    ==: ImageMaps.Map
+    image: tv
+    x: 0
+    y: 0
+    scale: 0.256
+  215:
+    ==: ImageMaps.Map
+    image: tv
+    x: 0
+    y: 1
+    scale: 0.256
+  216:
+    ==: ImageMaps.Map
+    image: tv
+    x: 1
+    y: 0
+    scale: 0.256
+  217:
+    ==: ImageMaps.Map
+    image: tv
+    x: 1
+    y: 1
+    scale: 0.256
+  218:
+    ==: ImageMaps.Map
+    image: tv
+    x: 2
+    y: 0
+    scale: 0.256
+  219:
+    ==: ImageMaps.Map
+    image: tv
+    x: 2
+    y: 1
+    scale: 0.256
+  220:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 0
+    y: 0
+    scale: 0.128
+  221:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 0
+    y: 1
+    scale: 0.128
+  222:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 0
+    y: 2
+    scale: 0.128
+  223:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 1
+    y: 0
+    scale: 0.128
+  224:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 1
+    y: 1
+    scale: 0.128
+  225:
+    ==: ImageMaps.Map
+    image: porte3
+    x: 1
+    y: 2
+    scale: 0.128
+  226:
+    ==: ImageMaps.Map
+    image: blanc
+    x: 0
+    y: 0
+    scale: 0.128
+  227:
+    ==: ImageMaps.Map
+    image: cadre
+    x: 0
+    y: 0
+    scale: 0.128
+  228:
+    ==: ImageMaps.Map
+    image: ecran1
+    x: 0
+    y: 0
+    scale: 0.256
+  229:
+    ==: ImageMaps.Map
+    image: ecran1
+    x: 1
+    y: 0
+    scale: 0.256
+  230:
+    ==: ImageMaps.Map
+    image: ecran2
+    x: 0
+    y: 0
+    scale: 0.256
+  231:
+    ==: ImageMaps.Map
+    image: ecran2
+    x: 1
+    y: 0
+    scale: 0.256
+  232:
+    ==: ImageMaps.Map
+    image: yoko2
+    x: 0
+    y: 0
+    scale: 0.256
+  233:
+    ==: ImageMaps.Map
+    image: yoko2
+    x: 0
+    y: 1
+    scale: 0.256
+  234:
+    ==: ImageMaps.Map
+    image: yoko1
+    x: 0
+    y: 0
+    scale: 0.256
+  235:
+    ==: ImageMaps.Map
+    image: yoko1
+    x: 0
+    y: 1
+    scale: 0.256
+  236:
+    ==: ImageMaps.Map
+    image: affiche2
+    x: 0
+    y: 0
+    scale: 0.256
+  237:
+    ==: ImageMaps.Map
+    image: affiche2
+    x: 0
+    y: 1
+    scale: 0.256
+  238:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 0
+    y: 0
+    scale: 0.256
+  239:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 0
+    y: 1
+    scale: 0.256
+  240:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 0
+    y: 2
+    scale: 0.256
+  241:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 0
+    y: 3
+    scale: 0.256
+  242:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 0
+    y: 4
+    scale: 0.256
+  243:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 1
+    y: 0
+    scale: 0.256
+  244:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 1
+    y: 1
+    scale: 0.256
+  245:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 1
+    y: 2
+    scale: 0.256
+  246:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 1
+    y: 3
+    scale: 0.256
+  247:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 1
+    y: 4
+    scale: 0.256
+  248:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 2
+    y: 0
+    scale: 0.256
+  249:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 2
+    y: 1
+    scale: 0.256
+  250:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 2
+    y: 2
+    scale: 0.256
+  251:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 2
+    y: 3
+    scale: 0.256
+  252:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 2
+    y: 4
+    scale: 0.256
+  253:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 3
+    y: 0
+    scale: 0.256
+  254:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 3
+    y: 1
+    scale: 0.256
+  255:
+    ==: ImageMaps.Map
+    image: cyprien
+    x: 3
+    y: 2
+    scale: 0.256
