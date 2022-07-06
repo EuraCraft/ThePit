@@ -115,7 +115,6 @@ public class Bank {
     /**
      * Ajouter de l'xp au joueur
      * @param experience xp to add
-     * @return nombre de niveaux passés par le joueur
      */
     public void addExperience(BigDecimal experience) {
         addExperience(experience, experience, 0);
@@ -177,7 +176,7 @@ public class Bank {
      * Définir l'xp à atteindre pour passer au niveau suivant
      */
     private void setNextLevelExperience(BigDecimal nextLevelExperience) {
-        this.nextLevelExperience = nextLevelExperience.multiply(new BigDecimal(1 + prestige.getXpNeededMultiplier() / 100));
+        this.nextLevelExperience = nextLevelExperience.multiply(BigDecimal.valueOf(prestige.getXpNeededMultiplier()));
     }
 
     /**

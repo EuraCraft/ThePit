@@ -16,5 +16,6 @@ public interface IQuest {
     void load(Player player);
     void save(Player player);
     void complete(Player player);
+    void onReset();
 
 }

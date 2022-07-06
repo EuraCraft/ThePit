@@ -17,9 +17,8 @@ public class HunterQuest extends Quest {
 
         Player player = event.getPlayer();
 
-        if (player != null && !isInCoolDown(player)) {
+        if (player != null && !isInCoolDown(player))
             increaseProgression(player);
-        }
 
     }
 

@@ -22,12 +22,4 @@ public class ExperienceCollectQuest extends Quest {
 
     }
 
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
-
-        if (event.getMessage().equalsIgnoreCase("finish collectionneur xp"))
-            setProgression(event.getPlayer(), getAmount());
-
-    }
-
 }

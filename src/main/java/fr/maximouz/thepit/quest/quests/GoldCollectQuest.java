@@ -22,12 +22,4 @@ public class GoldCollectQuest extends Quest {
 
     }
 
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
-
-        if (event.getMessage().equalsIgnoreCase("finish collectionneur gold"))
-            setProgression(event.getPlayer(), getAmount());
-
-    }
-
 }

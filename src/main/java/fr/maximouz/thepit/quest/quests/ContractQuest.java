@@ -1,9 +1,13 @@
 package fr.maximouz.thepit.quest.quests;
 
+import fr.maximouz.thepit.events.QuestCompleteEvent;
 import fr.maximouz.thepit.quest.Quest;
 import fr.maximouz.thepit.quest.QuestType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.math.BigDecimal;
 
 public class ContractQuest extends Quest {
 
@@ -12,9 +16,9 @@ public class ContractQuest extends Quest {
     }
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
+    public void onQuestComplete(QuestCompleteEvent event) {
 
-        if (event.getMessage().equalsIgnoreCase("finish contrat"))
+        if (!isInCoolDown(event.getPlayer()))
             increaseProgression(event.getPlayer());
 
     }

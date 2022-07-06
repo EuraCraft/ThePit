@@ -3,6 +3,8 @@ package fr.maximouz.thepit.listeners;
 import fr.euracraft.api.EuraAPI;
 import fr.euracraft.api.player.IEuraPlayer;
 import fr.maximouz.thepit.ThePit;
+import fr.maximouz.thepit.area.Area;
+import fr.maximouz.thepit.area.AreaManager;
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.BankManager;
 import fr.maximouz.thepit.bank.Level;
@@ -25,6 +27,11 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class PlayerListener implements Listener {
@@ -152,7 +159,7 @@ public class PlayerListener implements Listener {
 
             Player player = (Player) event.getEntity();
 
-            if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.FALL || AreaManager.getInstance().isInSpawn(player.getLocation())) {
                 
                 event.setCancelled(true);
 
@@ -164,16 +171,6 @@ public class PlayerListener implements Listener {
             }
 
         }
-
-    }
-
-    @EventHandler (priority = EventPriority.HIGHEST)
-    public void onDamage3(EntityDamageByEntityEvent event) {
-
-        if (event.getEntity().getType() != EntityType.PLAYER)
-            return;
-
-        System.out.print("after: " + event.getDamage());
 
     }
 
@@ -191,7 +188,7 @@ public class PlayerListener implements Listener {
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 1f);
 
             Level currentLevel = bank.getLevel();
-            Level previousLevel = Level.getLevel(bank.getLevel().level - event.getLevelPassed());
+            Level previousLevel = Level.getLevel(currentLevel.level - event.getLevelPassed());
 
             String color = bank.getPrestige().getColor();
             String text = color + "[" + previousLevel.getLevel() + color + "] §7➟ " + color + "[" + currentLevel.getLevel() + color + "]";
@@ -206,13 +203,38 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
 
+        Player player = event.getPlayer();
         event.setFormat("%s§7: %s");
 
+        if (!player.isOp())
+            return;
+
         if (event.getMessage().startsWith("xp")) {
-            BankManager.getInstance().getBank(event.getPlayer()).addExperience(new BigDecimal(event.getMessage().split(Pattern.quote(" "))[1]));
+            BankManager.getInstance().getBank(player).addExperience(new BigDecimal(event.getMessage().split(Pattern.quote(" "))[1]));
         } else if (event.getMessage().startsWith("gold")) {
-            BankManager.getInstance().getBank(event.getPlayer()).pay(new BigDecimal(event.getMessage().split(Pattern.quote(" "))[1]));
+            BankManager.getInstance().getBank(player).pay(new BigDecimal(event.getMessage().split(Pattern.quote(" "))[1]));
+        } else if (event.getMessage().startsWith("events time")) {
+            ThePit.getInstance().getGameEventManager().getEventsCalendar().entrySet().stream()
+                    .sorted(Comparator.comparingLong(Map.Entry::getKey))
+                    .forEach(entry -> {
+                        String date = new SimpleDateFormat("dd/MM HH:mm:ss").format(new Date(entry.getKey()));
+                        player.sendMessage(" - " + date + " §e§l" + entry.getValue().name().toUpperCase(Locale.ROOT));
+            });
+        } else if (event.getMessage().startsWith("events start")) {
+            ThePit.getInstance().getGameEventManager().startNextGame();
         }
+
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+
+        Player player = event.getPlayer();
+        Area areaFrom = AreaManager.getInstance().getArea(event.getFrom());
+        Area areaTo = AreaManager.getInstance().getArea(event.getTo());
+
+        if (areaFrom != areaTo)
+            Bukkit.getPluginManager().callEvent(new PlayerChangeAreaEvent(player, areaFrom, areaTo));
 
     }
 

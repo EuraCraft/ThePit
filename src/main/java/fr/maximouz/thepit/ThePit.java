@@ -12,6 +12,7 @@ import fr.maximouz.thepit.commands.AreaCommand;
 import fr.maximouz.thepit.commands.SpawnPointCommand;
 import fr.maximouz.thepit.displayname.DisplayNameManager;
 import fr.maximouz.thepit.events.*;
+import fr.maximouz.thepit.gameevent.GameEventManager;
 import fr.maximouz.thepit.inventories.ShopInventory;
 import fr.maximouz.thepit.inventories.prestige.PrestigeInventory;
 import fr.maximouz.thepit.inventories.quest.QuestInventory;
@@ -52,6 +53,7 @@ public class ThePit extends JavaPlugin {
     private Configuration npcConfiguration;
 
     private QuestManager questManager;
+    private GameEventManager gameEventManager;
 
     @Override
     public void onEnable() {
@@ -146,6 +148,7 @@ public class ThePit extends JavaPlugin {
      */
     public void registerManagers() {
         questManager = new QuestManager();
+        gameEventManager = new GameEventManager();
     }
 
     /**
@@ -255,6 +258,10 @@ public class ThePit extends JavaPlugin {
         return questManager;
     }
 
+    public GameEventManager getGameEventManager() {
+        return gameEventManager;
+    }
+
     /**
      * Tuer un joueur
      * @param player Victime
@@ -356,7 +363,7 @@ public class ThePit extends JavaPlugin {
                         if (!primeStartEvent.isCancelled()) {
                             PrimeManager.getInstance().createPrime(killerPrime);
                             Bukkit.broadcastMessage("§6§lPRIME! §7de §650.0g §7sur§r " + killer.getDisplayName() + " §7pour sa série de meurtres élevée");
-                            new PrimeParticleTask(killer, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 5L);
+                            //new PrimeParticleTask(killer, killerPrime).runTaskTimer(ThePit.getInstance(), 0L, 5L);
                         }
 
                     } else {

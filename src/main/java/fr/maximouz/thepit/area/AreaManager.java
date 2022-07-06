@@ -5,6 +5,7 @@ import fr.maximouz.thepit.utils.Configuration;
 import fr.maximouz.thepit.utils.Cuboid;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class AreaManager {
     private final Configuration configuration;
     private final List<Area> areas;
     private Area mapArea;
+    private Area spawnArea;
 
     public AreaManager() {
         areas = new ArrayList<>();
@@ -38,6 +40,13 @@ public class AreaManager {
                 .orElse(null);
     }
 
+    public Area getArea(Location location) {
+        return areas.stream()
+                .filter(area -> area.getCuboid().contains(location))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void loadAreas() {
 
         int max = 0;
@@ -50,6 +59,11 @@ public class AreaManager {
 
                     Cuboid cuboid = Cuboid.fromString(configuration.getConfig().getString(areaName));
                     mapArea = new Area(cuboid, areaName, "");
+
+                } else if(areaName.equalsIgnoreCase("spawn")) {
+
+                    Cuboid cuboid = Cuboid.fromString(configuration.getConfig().getString(areaName));
+                    spawnArea = new Area(cuboid, areaName, "");
 
                 } else {
 
@@ -80,5 +94,13 @@ public class AreaManager {
 
     public Area getMapArea() {
         return mapArea;
+    }
+
+    public Area getSpawnArea() {
+        return spawnArea;
+    }
+
+    public boolean isInSpawn(Location location) {
+        return getSpawnArea().getCuboid().contains(location);
     }
 }

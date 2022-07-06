@@ -2,6 +2,7 @@ package fr.maximouz.thepit.quest;
 
 import fr.maximouz.thepit.bank.Bank;
 import fr.maximouz.thepit.bank.BankManager;
+import fr.maximouz.thepit.events.QuestCompleteEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -70,7 +71,7 @@ public abstract class Quest implements IQuest, Listener {
         bank.pay(getReward());
         player.sendMessage("§2Quête " + getTime().getStringValue() + " terminée !");
         player.sendMessage("§a" + getName() + "\n §7" + getDescription() + "\n §6+" + getReward().toString() + "g");
-        //player.sendMessage("§b§lCONTRAT COMPLÉTÉ! §r§6+" + getReward().toString() + "g");
+        Bukkit.getPluginManager().callEvent(new QuestCompleteEvent(player, this));
     }
 
     public boolean isInCoolDown(UUID uuid) {
@@ -123,4 +124,6 @@ public abstract class Quest implements IQuest, Listener {
 
     }
 
+    @Override
+    public void onReset() {}
 }

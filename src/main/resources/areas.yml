@@ -1,4 +1,17 @@
-map: "world,0,0,0=>0,0,0"
+map: "world,-130,0,130=>130,255,-130"
+spawn: "world,20,113,-22=>-19,255,20"
 pit:
   display_name: "&6Principale"
-  cuboid: "world,0,0,0=>0,0,0"
+  cuboid: "world,14,82,16=>-12,112,-16"
+a:
+  display_name: "&aA"
+  cuboid: "world,0,81,0=>130,255,130"
+b:
+  display_name: "&bB"
+  cuboid: "world,0,81,0=>130,255,-130"
+c:
+  display_name: "&cC"
+  cuboid: "world,0,81,0=>-130,255,-130"
+d:
+  display_name: "&dD"
+  cuboid: "world,0,81,0=>-130,255,130"

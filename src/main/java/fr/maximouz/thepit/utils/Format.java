@@ -24,6 +24,8 @@ public class Format {
     }
 
     public static String time(long ms) {
+        if (ms <= 0)
+            return "0s";
         return TimeUnit.MILLISECONDS.toDays(ms) > 0
                 ? new SimpleDateFormat("dd:HH").format(ms).replace(":", "j") + "h"
                 : TimeUnit.MILLISECONDS.toHours(ms) > 0

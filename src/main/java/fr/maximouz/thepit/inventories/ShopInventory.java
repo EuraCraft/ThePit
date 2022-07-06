@@ -29,7 +29,7 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "si vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: §6150g",
+                            ChatColor.GRAY + "Prix: §6150,0g",
                             bank.getBalance().compareTo(BigDecimal.valueOf(150)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
@@ -71,7 +71,7 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: §650g",
+                            ChatColor.GRAY + "Prix: §650,0g",
                             bank.getBalance().compareTo(BigDecimal.valueOf(50)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).build();
 
@@ -111,7 +111,7 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: §6500g",
+                            ChatColor.GRAY + "Prix: §6500,0g",
                             bank.getBalance().compareTo(BigDecimal.valueOf(500)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();
@@ -167,7 +167,7 @@ public class ShopInventory extends AbstractInterface {
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "Cet item tombe au sol si",
                             ChatColor.GRAY + "" + ChatColor.ITALIC + "vous mourez.",
                             "",
-                            ChatColor.GRAY + "Prix: §6300g",
+                            ChatColor.GRAY + "Prix: §6300,0g",
                             bank.getBalance().compareTo(BigDecimal.valueOf(300)) >= 0 ? ChatColor.YELLOW + "Clic gauche pour acheter." : ChatColor.RED + "Vous n'avez pas assez de gold !"
                     ).addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
                     .build();

@@ -45,22 +45,24 @@ public class QuestManager {
 
     public void loadResetTask(QuestTime questTime) {
 
-        ThePit.getInstance().getConfig().addDefault("times." + questTime.toString().toLowerCase() + ".reset_at", System.currentTimeMillis() + questTime.getCoolDown());
-        long resetAt = ThePit.getInstance().getConfig().getLong("times." + questTime.toString().toLowerCase() + ".reset_at");
+        String key = "times." + questTime.toString().toLowerCase() + ".reset_at";
+        long resetAt = ThePit.getInstance().getConfig().getLong(key, System.currentTimeMillis() + questTime.getCoolDown());
 
         if (resetAt - System.currentTimeMillis() <= 0)
             resetAt = System.currentTimeMillis() + questTime.getCoolDown();
 
-        ThePit.getInstance().getConfig().set("times." + questTime.toString().toLowerCase() + ".reset_at", resetAt);
+        ThePit.getInstance().getConfig().set(key, resetAt);
         ThePit.getInstance().saveConfig();
 
         this.resetAt.put(questTime, resetAt);
-        Bukkit.getScheduler().runTaskLaterAsynchronously(ThePit.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(ThePit.getInstance(), () -> {
 
-            resetProgressions(questTime);
-            loadResetTask(questTime);
+            if (this.resetAt.get(questTime) - System.currentTimeMillis() <= 0) {
+                resetProgressions(questTime);
+                loadResetTask(questTime);
+            }
 
-        }, 20 * TimeUnit.MILLISECONDS.toSeconds(questTime.getCoolDown()));
+        }, 0L, 20L);
 
     }
 
